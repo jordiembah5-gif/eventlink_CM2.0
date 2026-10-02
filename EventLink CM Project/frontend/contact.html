@@ -13,6 +13,8 @@
     <link rel="stylesheet"
           href="css/contact.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/futuristic.css">
 </head>
 
 <body>
@@ -20,35 +22,35 @@
 
 <header class="navbar">
 
-    <a href="index.html" class="logo">
+    <a href="/" class="logo">
         EventLink <span>CM</span>
     </a>
 
     <nav id="navMenu">
 
-        <a href="index.html">
+        <a href="/">
             Home
         </a>
 
-        <a href="events.html">
+        <a href="/events">
             Events
         </a>
 
-        <a href="about.html">
+        <a href="/about">
             About
         </a>
 
-        <a href="contact.html"
+        <a href="/contact"
            class="active">
             Contact
         </a>
 
-        <a href="login.html"
+        <a href="/login"
            class="login-btn">
             Login
         </a>
 
-        <a href="register.html"
+        <a href="/register"
            class="register-btn">
             Register
         </a>
@@ -70,68 +72,45 @@
 
         <section>
 
-            <p class="small-title">
-                GET IN TOUCH
-            </p>
+            <p class="small-title">GET IN TOUCH</p>
+            <h1>Contact EventLink CM</h1>
+            <p>Have a question, suggestion or problem? Send us a message or visit us.</p>
 
-            <h1>
-                Contact EventLink CM
-            </h1>
+            <div class="contact-info" style="margin-top: 30px;">
+                <p><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
+                <p><i class="fas fa-phone"></i> +237 600 000 000</p>
+            </div>
 
-            <p>
-                Have a question, suggestion or problem?
-                Send us a message.
-            </p>
+            <div class="business-hours" style="margin-top: 40px; padding: 20px; background: #f9f9f9; border-left: 4px solid #28a745; border-radius: 4px;">
+                <h3 style="margin-bottom: 15px; color: #10003c; font-family: 'Orbitron', sans-serif;">Business Hours</h3>
+                <p><strong>Monday - Friday:</strong> 8:00 AM - 6:00 PM</p>
+                <p><strong>Saturday:</strong> 9:00 AM - 2:00 PM</p>
+                <p><strong>Sunday:</strong> Closed</p>
+            </div>
 
-            <div class="contact-info">
-
-                <p>
-                    📧 eventlinkcm@example.com
-                </p>
-
-                <p>
-                    📍 Cameroon
-                </p>
-
-                <p>
-                    📞 +237 600 000 000
-                </p>
-
+            <div class="faq" style="margin-top: 40px;">
+                <h3 style="margin-bottom: 15px; color: #10003c; font-family: 'Orbitron', sans-serif;">Frequently Asked Questions</h3>
+                <p><strong>How quickly do you respond?</strong><br>We typically reply to all inquiries within 24 business hours.</p>
+                <p style="margin-top: 10px;"><strong>Can I partner with you?</strong><br>Yes! We are always looking for event sponsors and partners.</p>
             </div>
 
         </section>
 
-
-        <form id="contactForm"
-              onsubmit="sendMessage(event)">
-
-            <input
-                id="name"
-                type="text"
-                placeholder="Your name"
-                required
-            >
-
-            <input
-                id="email"
-                type="email"
-                placeholder="Your email"
-                required
-            >
-
-            <textarea
-                id="message"
-                placeholder="Your message"
-                rows="6"
-                required>
-            </textarea>
-
-            <button type="submit">
-                Send Message
-            </button>
-
+        <form id="contactForm" onsubmit="sendMessage(event)">
+            <h3 style="margin-bottom: 20px; color: #10003c; font-family: 'Orbitron', sans-serif;">Send a Message</h3>
+            <input id="name" type="text" placeholder="Your name" required>
+            <input id="email" type="email" placeholder="Your email" required>
+            <select id="subject" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ccc; font-family: 'Rajdhani', sans-serif;" required>
+                <option value="" disabled selected>Select a subject</option>
+                <option value="support">Technical Support</option>
+                <option value="billing">Billing Inquiry</option>
+                <option value="partnership">Partnership</option>
+                <option value="other">Other</option>
+            </select>
+            <textarea id="message" placeholder="Your message" rows="6" required></textarea>
+            <button type="submit">Send Message</button>
             <p id="formMessage"></p>
-
         </form>
 
     </div>
@@ -139,9 +118,37 @@
 </main>
 
 
-<footer>
-    <p>© 2026 EventLink CM.</p>
+
+
+<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
+            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
+                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
+                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
+                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
+            </ul>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
+        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
+    </div>
 </footer>
+
+
 
 
 <script src="js/contact.js"></script>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLink CM | Analytics</title>
+    <link rel="stylesheet" href="css/futuristic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: #fff; padding: 20px; border-radius: 18px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05); }
+        .stat-number { font-size: 36px; font-weight: 800; color: #0071E3; margin-bottom: 5px; }
+        .stat-label { color: #86868B; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05); }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        th { background: #fbfbfd; font-weight: 600; color: #1D1D1F; }
+        .scanned-yes { color: #28a745; font-weight: 600; }
+        .scanned-no { color: #dc3545; font-weight: 600; }
+        .mock-scan-btn { background: #0071E3; color: white; padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <a href="/" class="logo">EventLink <span>CM</span></a>
+    <nav id="navMenu">
+        <a href="/">Home</a>
+        <a href="/events">Events</a>
+        <a href="/organized" class="active">Organized Events</a>
+        <button onclick="window.location.href='/dashboard'" class="secondary-btn" style="padding: 8px 16px !important;">Back to Dashboard</button>
+    </nav>
+</header>
+
+<main class="page" style="padding-top: 100px; max-width: 1000px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <h1 id="eventNameHeader" style="text-align: center; margin-bottom: 40px;">Event Analytics</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number" id="totalRsvps">0</div>
+            <div class="stat-label">Total RSVPs</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalArrived">0</div>
+            <div class="stat-label">Total Arrived</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" style="color: #1D1D1F;" id="totalFemale">0</div>
+            <div class="stat-label">Female</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" style="color: #1D1D1F;" id="totalMale">0</div>
+            <div class="stat-label">Male</div>
+        </div>
+    </div>
+
+    <h3 style="margin-bottom: 20px;">Attendee List & Check-in</h3>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Status</th>
+                    <th>Time Arrived</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="attendeeTableBody">
+                <tr><td colspan="6" style="text-align: center;">Loading attendees...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get('id');
+
+    async function loadAnalytics() {
+        if (!eventId) {
+            document.body.innerHTML = "<h2 style='text-align: center; margin-top: 100px;'>No Event Selected</h2>";
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/events/${eventId}/analytics`);
+            const data = await response.json();
+
+            document.getElementById('totalRsvps').textContent = data.total_rsvps;
+            document.getElementById('totalArrived').textContent = data.total_arrived;
+            document.getElementById('totalFemale').textContent = data.gender_breakdown.female;
+            document.getElementById('totalMale').textContent = data.gender_breakdown.male;
+
+            const tbody = document.getElementById('attendeeTableBody');
+            tbody.innerHTML = '';
+
+            if (data.attendees.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No RSVPs yet.</td></tr>';
+                return;
+            }
+
+            data.attendees.forEach(a => {
+                const tr = document.createElement('tr');
+                const statusHtml = a.scanned 
+                    ? `<span class="scanned-yes"><i class="fas fa-check-circle"></i> Checked In</span>` 
+                    : `<span class="scanned-no"><i class="fas fa-times-circle"></i> Pending</span>`;
+                
+                const actionHtml = a.scanned 
+                    ? `-` 
+                    : `<button class="mock-scan-btn" onclick="mockScan('${a.email}')">Simulate QR Scan</button>`;
+
+                tr.innerHTML = `
+                    <td><strong>${a.name}</strong></td>
+                    <td>${a.email}</td>
+                    <td>${a.gender || 'Unknown'}</td>
+                    <td>${statusHtml}</td>
+                    <td>${a.time_arrived || '-'}</td>
+                    <td>${actionHtml}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (error) {
+            console.error("Failed to load analytics:", error);
+        }
+    }
+
+    async function mockScan(userEmail) {
+        try {
+            const response = await fetch(`/api/events/${eventId}/scan`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: userEmail })
+            });
+            const data = await response.json();
+            if(response.ok) {
+                alert("QR Code scanned successfully! Attendee checked in.");
+                loadAnalytics(); // Refresh table
+            } else {
+                alert(data.detail || data.message);
+            }
+        } catch (error) {
+            alert("Error scanning ticket.");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadAnalytics);
+</script>
+
+</body>
+</html>

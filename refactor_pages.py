@@ -1,111 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+import os
+import re
 
-<head>
+base_dir = r"g:\EventLink-CM_project\EventLink CM Project\frontend"
 
-    <meta charset="UTF-8">
+html_files = [
+    "index.html",
+    "events.html",
+    "about.html",
+    "contact.html",
+    "login.html",
+    "register.html",
+    "create-event.html"
+]
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>EventLink CM | Login</title>
-
-    <link rel="stylesheet"
-          href="css/auth.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/futuristic.css">
-</head>
-
-<body>
-
-
-<header class="navbar">
-
-    <a href="/" class="logo">
-        EventLink <span>CM</span>
-    </a>
-
-    <nav>
-
-        <a href="/">Home</a>
-
-        <a href="/events">Events</a>
-
-        <a href="/about">About</a>
-
-        <a href="/contact">Contact</a>
-
-        <a href="/login"
-           class="login-btn">
-            Login
-        </a>
-
-        <a href="/register"
-           class="register-btn">
-            Register
-        </a>
-
-    </nav>
-
-</header>
-
-
-<main class="page">
-
-    <div class="form-box">
-
-        <h1>Welcome Back</h1>
-
-        <p class="subtitle">
-            Login to your EventLink CM account.
-        </p>
-
-
-        <form onsubmit="loginUser(event)">
-
-            <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                required
-            >
-
-            <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                required
-            >
-
-            <button type="submit">
-                Login
-            </button>
-
-            <p id="message"
-               class="message">
-            </p>
-
-        </form>
-
-
-        <p class="account-link">
-
-            Don't have an account?
-
-            <a href="/register">
-                Register
-            </a>
-
-        </p>
-
-    </div>
-
-</main>
-
-
-
-
+footer_html = """
 <footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
     <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
         <div style="flex: 1; min-width: 250px;">
@@ -133,11 +41,34 @@
         <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
     </div>
 </footer>
+"""
 
+for filename in html_files:
+    path = os.path.join(base_dir, filename)
+    if not os.path.exists(path):
+        continue
+    
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
 
+    # Replace links
+    content = content.replace('href="index.html"', 'href="/"')
+    content = content.replace('href="events.html"', 'href="/events"')
+    content = content.replace('href="about.html"', 'href="/about"')
+    content = content.replace('href="contact.html"', 'href="/contact"')
+    content = content.replace('href="login.html"', 'href="/login"')
+    content = content.replace('href="register.html"', 'href="/register"')
+    content = content.replace('href="create-event.html"', 'href="/create-event"')
+    
+    # Replace JS references (window.location.href)
+    content = content.replace("window.location.href = 'events.html", "window.location.href = '/events")
+    content = content.replace("window.location.href = 'login.html'", "window.location.href = '/login'")
 
+    # Replace footer
+    # Using regex to find the entire footer block and replace it
+    content = re.sub(r'<footer.*?>.*?</footer>', footer_html, content, flags=re.DOTALL)
 
-<script src="js/login.js"></script>
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
 
-</body>
-</html>
+print("HTML pages refactored successfully.")

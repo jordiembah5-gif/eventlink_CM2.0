@@ -1,4 +1,4 @@
-* {
+@* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #120044;
+    background: #1200441c;
     color: white;
 }
 
@@ -41,7 +41,7 @@ body {
 }
 
 .logo span {
-    color: #e45cff;
+    color: #0071E3;
 }
 
 nav {
@@ -59,19 +59,19 @@ nav a {
 
 nav a:hover,
 nav .active {
-    color: #e45cff;
+    color: #0071E3;
 }
 
 
 /* BUTTONS */
 
 .login-btn {
-    border: 1px solid #e45cff;
+    border: 1px solid #0071E3;
     border-radius: 7px;
 }
 
 .register-btn {
-    background: #e45cff;
+    background: #0071E3;
     color: #16002f !important;
 
     border-radius: 7px;
@@ -138,7 +138,7 @@ h1 {
 }
 
 h1 span {
-    color: #e45cff;
+    color: #0071E3;
 }
 
 .intro {
@@ -174,7 +174,7 @@ h1 span {
 }
 
 .primary-btn {
-    background: #e45cff;
+    background: #0071E3;
 
     color: #18002f;
 }
