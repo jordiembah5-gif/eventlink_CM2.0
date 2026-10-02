@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import uuid
-=======
->>>>>>> origin/role1
 # ==============================================================================
 # CHAPTER 4: THE MAIN APPLICATION (main.py)
 # ==============================================================================
@@ -91,15 +88,11 @@ def get_events(db: Session = Depends(get_db)):
 
 @app.post("/api/events")
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
-<<<<<<< HEAD
     # Create a base ID from the name
     base_id = event.name.lower().replace(" ", "-")
     # Append a short unique string to guarantee uniqueness
     event_id = f"{base_id}-{uuid.uuid4().hex[:6]}"
     
-=======
-    event_id = event.name.lower().replace(" ", "-")
->>>>>>> origin/role1
     new_event = DBEvent(
         id=event_id, name=event.name, category=event.category,
         location=event.location, date=event.date, icon=event.icon, created_by=event.created_by

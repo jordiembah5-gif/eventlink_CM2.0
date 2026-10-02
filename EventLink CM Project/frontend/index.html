@@ -1,187 +1,204 @@
-<!-- ==============================================================================
-   CHAPTER 7: HTML - THE STRUCTURE (index.html)
-   ==============================================================================
-   Welcome to HTML (HyperText Markup Language)! 
-   HTML is the skeleton of every website. It is made up of "tags" that wrap 
-   around text to tell the browser what that text is (e.g., a heading, a button, an image).
-   
-   Every tag is wrapped in angle brackets like <this>. 
-   Most tags have an opening tag <div> and a closing tag </div> with a slash.
-   ============================================================================== -->
-
-<!-- This tells the web browser: "Hey, I am using the newest version of HTML (HTML5)!" -->
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- 
-    THE HEAD
-    The <head> section is invisible to the user. It contains the brain/metadata of the page.
-    This is where we set the title of the tab and link our CSS paint (stylesheets).
--->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes it work on mobile phones! -->
-
-    <title>EventLink CM | Home</title>
-
-    <!-- 
-        Here we link our CSS files. 
-        When the browser reads this, it downloads the CSS and paints the webpage!
-    -->
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/futuristic.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventLink CM | Discover Events in Cameroon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
-<!-- 
-    THE BODY
-    Everything inside the <body> tag is visible to the user on the screen.
--->
 <body>
 
-<!-- 
-    <header> is a structural tag that tells the browser: "This is the top navigation bar."
-    The 'class="navbar"' attribute lets our CSS (futuristic.css) find this exact tag and style it.
--->
+<!-- NAVBAR -->
 <header class="navbar">
+  <a href="/" class="logo">Event<span>Link</span> CM</a>
 
-    <!-- <a> (Anchor tag) creates a clickable link. "href" tells it where to go when clicked. -->
-    <a href="/" class="logo">
-        <span>EventLink</span> <span>CM</span>
-    </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/events">Events</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
 
-    <!-- <nav> stands for Navigation. It groups all our menu links together. -->
-    <nav id="navMenu">
-        <a href="/" class="active">Home</a>
-        <a href="/events">Events</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-
-        <a href="/login" class="login-btn">Login</a>
-        <a href="/register" class="register-btn">Register</a>
-    </nav>
-
+  <div class="nav-actions">
+    <a href="/login" class="btn-ghost">Log in</a>
+    <a href="/register" class="btn-primary"><i class="fas fa-user-plus"></i> Sign up</a>
+    <button class="menu-toggle" onclick="toggleNav()" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 </header>
 
-
-<!-- 
-    <section> is like a chapter in a book. It groups a large piece of the webpage together.
-    Here we create the "Hero" section (the big welcome banner).
--->
+<!-- HERO -->
 <section class="hero">
-
-    <!-- <div> is an invisible box used to group elements together so we can style them. -->
-    <div class="hero-content">
-
-        <!-- <p> stands for Paragraph. It is used for standard text. -->
-        <p class="tagline">
-            CONNECT • DISCOVER • EXPERIENCE
-        </p>
-
-        <!-- <h1> is a Heading 1. It is the biggest, most important text on the page. -->
-        <h1>
-            Find Events.<br> <!-- <br> creates a line break (like pressing Enter on a keyboard) -->
-            <span>Make Memories.</span> <!-- <span> lets us color a specific word differently using CSS -->
-        </h1>
-
-        <p class="intro">
-            Discover exciting events happening around Cameroon
-            and connect with people who share your interests.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="/events" class="primary-btn">Explore Events</a>
-            
-            <!-- 
-                This button has an 'onclick' attribute. 
-                When clicked, it triggers a JavaScript function called goToCreateEvent().
-            -->
-            <button onclick="goToCreateEvent()" class="primary-btn" style="background-color: #28a745; color: white; border-color: #28a745; padding: 12px 24px; font-weight: 600; font-size: 16px;">Host an Event</button>
-            <a href="/register" class="secondary-btn" style="background: transparent; color: #1D1D1F; border: 1px solid #1D1D1F; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; border-radius: 999px;">Create Account</a>
-        </div>
-        
-        <div class="home-search-container" style="margin-top: 30px; display: flex; justify-content: center; gap: 10px;">
-            <!-- <input> creates a text box where the user can type something. -->
-            <input type="text" id="homeSearch" placeholder="Search events..." style="padding: 12px; width: 300px; border-radius: 4px; border: 1px solid #ccc;">
-            <button onclick="searchFromHome()" style="padding: 12px 24px;">Search</button>
-        </div>
-
+  <div class="hero-text">
+    <span class="hero-badge"><i class="fas fa-map-marker-alt"></i> Yaoundé · Douala · All of Cameroon</span>
+    <h1>Find Events.<br><em>Make Memories.</em></h1>
+    <p>EventLink CM connects organisers and participants across Cameroon. Discover music nights, business forums, workshops and more — all in one place.</p>
+    <div class="hero-cta">
+      <a href="/events" class="btn btn-green btn-lg">Browse Events</a>
+      <a href="/register" class="btn btn-outline btn-lg">Host an Event</a>
     </div>
-
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80" alt="People enjoying an event in Cameroon">
+    <div class="hero-stat-bubble">
+      <div>
+        <strong>500+</strong>
+        <div style="font-size:12px;color:#5A5E58;">events hosted</div>
+      </div>
+      <span style="width:1px;height:32px;background:#E4E6E2;"></span>
+      <div>
+        <strong style="color:#2DB67D;">Free</strong>
+        <div style="font-size:12px;color:#5A5E58;">to join</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<section class="quick-section">
-
-    <div class="quick-card">
-        <!-- <img> displays an image. "src" is the URL of the image. "alt" is text for blind users using screen readers. -->
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&auto=format&fit=crop&q=60" alt="Concert Event">
-        <h3>Discover</h3> <!-- <h3> is a Heading 3. Smaller than an h1 or h2. -->
-        <p>
-            Find concerts, workshops, conferences and other
-            exciting events.
-        </p>
+<!-- SEARCH + FILTER -->
+<section class="section-sm" style="background:#fff;border-bottom:1px solid #E4E6E2;">
+  <div class="container">
+    <div class="search-bar">
+      <i class="fas fa-search" style="color:#8C908A;"></i>
+      <input type="text" id="homeSearch" placeholder="Search events by name or city…">
+      <select id="homeCategory">
+        <option value="all">All categories</option>
+        <option value="music">🎵 Music</option>
+        <option value="business">💼 Business</option>
+        <option value="technology">💻 Technology</option>
+        <option value="education">📚 Education</option>
+        <option value="sports">⚽ Sports</option>
+      </select>
+      <button class="btn btn-green" onclick="searchFromHome()">Search</button>
     </div>
-
-    <div class="quick-card">
-        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&auto=format&fit=crop&q=60" alt="Organizing Event">
-        <h3>Organize</h3>
-        <p>
-            Create and share your own events with the community.
-        </p>
-    </div>
-
-    <div class="quick-card">
-        <img src="https://images.unsplash.com/photo-1511632765486-a01c80cf59af?w=500&auto=format&fit=crop&q=60" alt="Networking">
-        <h3>Connect</h3>
-        <p>
-            Meet people and build useful connections.
-        </p>
-    </div>
-
+  </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="section" style="background:#F8F9F6;">
+  <div class="container">
+    <h2 class="section-title">How EventLink CM works</h2>
+    <p class="section-sub">Three simple steps to your next unforgettable experience</p>
+    <div class="grid-3">
+      <div class="card" style="padding:28px;">
+        <div style="width:48px;height:48px;background:#E8F7F1;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <i class="fas fa-search" style="color:#2DB67D;font-size:20px;"></i>
+        </div>
+        <h3 style="font-size:18px;margin-bottom:10px;">Discover</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">Browse concerts, conferences, workshops, and community meetups happening across Cameroon.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <div style="width:48px;height:48px;background:#E8F7F1;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <i class="fas fa-ticket-alt" style="color:#2DB67D;font-size:20px;"></i>
+        </div>
+        <h3 style="font-size:18px;margin-bottom:10px;">Register</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">Grab your free ticket in seconds. Receive a unique QR code sent straight to your dashboard.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <div style="width:48px;height:48px;background:#E8F7F1;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <i class="fas fa-users" style="color:#2DB67D;font-size:20px;"></i>
+        </div>
+        <h3 style="font-size:18px;margin-bottom:10px;">Connect</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">Show up, get scanned at the door, and meet people who share your interests.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- 
-    <footer> tells the browser: "This is the very bottom of the page." 
-    We use "inline styles" (style="...") here. This is a quick way to apply CSS directly to a tag 
-    without needing to use futuristic.css.
--->
-<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
-            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
-        </div>
-        <div style="flex: 1; min-width: 200px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
-            <!-- <ul> creates an Unordered List (bullet points). <li> creates a List Item. -->
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
-                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
-                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
-                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
-                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
-            </ul>
-        </div>
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
-            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
-        </div>
+<!-- UPCOMING EVENTS PREVIEW -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h2 class="section-title">Upcoming Events</h2>
+        <p class="section-sub" style="margin-bottom:0;">What's on in Cameroon right now</p>
+      </div>
+      <a href="/events" class="btn btn-outline">See all events <i class="fas fa-arrow-right"></i></a>
     </div>
-    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
-        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
+    <div class="grid-3" id="homeEventGrid">
+      <!-- JS populated -->
+      <div class="event-card" style="grid-column:1/-1;padding:40px;text-align:center;color:#8C908A;">
+        <i class="fas fa-spinner fa-spin" style="font-size:24px;margin-bottom:12px;display:block;"></i>
+        Loading events…
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- DARK FEATURES SECTION -->
+<section class="features-section">
+  <div class="container">
+    <h2 class="section-title" style="margin-bottom:6px;">Built for Cameroon organisers</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Everything you need to run a successful event</p>
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="icon"><i class="fas fa-qrcode"></i></div>
+        <h3>QR Attendance</h3>
+        <p>Scan participant QR codes at the door. Track who arrived in real time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><i class="fas fa-chart-bar"></i></div>
+        <h3>Live Analytics</h3>
+        <p>View registration counts, attendance rates, and gender breakdowns instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon"><i class="fas fa-calendar-check"></i></div>
+        <h3>Free Tickets</h3>
+        <p>Participants register and receive unique digital tickets — completely free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to host your first event?</h2>
+    <p>Join hundreds of organisers already using EventLink CM across Cameroon.</p>
+    <a href="/register" class="btn btn-white btn-lg">Get started — it's free</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Event<span>Link</span> CM</div>
+        <p>Your platform to discover, organise, and attend events across Cameroon. We bring communities together, one event at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/events">Browse Events</a></li>
+          <li><a href="/create-event">Host an Event</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Douala, Cameroon</p>
+        <p><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+        <p><i class="fas fa-phone"></i> +237 600 000 000</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EventLink CM · Made in 🇨🇲 Cameroon</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a></span>
+    </div>
+  </div>
 </footer>
 
-<!-- 
-    <script> tags are always placed at the VERY BOTTOM of the body.
-    Why? Because the browser loads the page from top to bottom. We want the user to see the 
-    HTML and CSS immediately before the browser starts downloading the Javascript logic.
--->
 <script src="js/home.js"></script>
-
 </body>
 </html>

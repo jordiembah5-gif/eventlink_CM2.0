@@ -1,164 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>EventLink CM | About</title>
-
-    <link rel="stylesheet"
-          href="css/about.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/futuristic.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventLink CM | About</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-
 <header class="navbar">
-
-    <a href="/" class="logo">
-        EventLink <span>CM</span>
-    </a>
-
-    <nav id="navMenu">
-
-        <a href="/">Home</a>
-
-        <a href="/events">Events</a>
-
-        <a href="/about" class="active">
-            About
-        </a>
-
-        <a href="/contact">
-            Contact
-        </a>
-
-        <a href="/login" class="login-btn">
-            Login
-        </a>
-
-        <a href="/register"
-           class="register-btn">
-            Register
-        </a>
-
-    </nav>
-
-    <button class="menu-btn"
-            onclick="toggleMenu()">
-        ☰
-    </button>
-
+  <a href="/" class="logo">Event<span>Link</span> CM</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/">Home</a></li>
+    <li><a href="/events">Events</a></li>
+    <li><a href="/about" class="active">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="/login" class="btn-ghost">Log in</a>
+    <a href="/register" class="btn-primary"><i class="fas fa-user-plus"></i> Sign up</a>
+    <button class="menu-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+  </div>
 </header>
 
+<!-- HERO -->
+<div class="page-header" style="padding:60px 5%;background:#fff;">
+  <div class="container">
+    <span class="hero-badge" style="margin-bottom:16px;display:inline-flex;"><i class="fas fa-flag"></i> Our story</span>
+    <h1 style="font-size:clamp(28px,4vw,44px);margin-bottom:14px;">Bringing Cameroon's events<br>to one place</h1>
+    <p style="color:#5A5E58;font-size:17px;max-width:560px;line-height:1.7;">EventLink CM was born out of a simple problem: too many great events were happening across Cameroon, but too few people knew about them.</p>
+  </div>
+</div>
 
-<main class="page">
-
-    <section class="about-box">
-
-        <p class="small-title">
-            ABOUT EVENTLINK CM
-        </p>
-
-        <h1>
-            Bringing Events and People Together
-        </h1>
-
-        <p>
-            EventLink CM is an event discovery and
-            connection platform designed to make it
-            easier for people to discover, organize
-            and participate in events across Cameroon.
-        </p>
-
-    </section>
-
-
-    <section class="features" style="margin-top: 40px;">
-
-        <div>
-            <h2><i class="fas fa-bullseye"></i> Our Goal</h2>
-            <p>Make event discovery simple and accessible for everyone.</p>
+<!-- MISSION CARDS -->
+<section class="section" style="background:#F8F9F6;">
+  <div class="container">
+    <div class="grid-3">
+      <div class="card" style="padding:28px;">
+        <div style="width:44px;height:44px;background:#E8F7F1;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <i class="fas fa-bullseye" style="color:#2DB67D;font-size:18px;"></i>
         </div>
-
-        <div>
-            <h2><i class="fas fa-globe-africa"></i> Our Vision</h2>
-            <p>Create a connected, thriving event community in Cameroon.</p>
+        <h3 style="font-size:18px;margin-bottom:10px;">Our Goal</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">Make event discovery simple, free, and accessible for every person in Cameroon — from Yaoundé to Buea to Bamenda.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <div style="width:44px;height:44px;background:#E8F7F1;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <i class="fas fa-globe-africa" style="color:#2DB67D;font-size:18px;"></i>
         </div>
-
-        <div>
-            <h2><i class="fas fa-rocket"></i> Our Mission</h2>
-            <p>Help organizers reach attendees and help attendees discover life-changing opportunities.</p>
+        <h3 style="font-size:18px;margin-bottom:10px;">Our Vision</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">A connected, thriving event community where organisers and attendees can find each other without friction.</p>
+      </div>
+      <div class="card" style="padding:28px;">
+        <div style="width:44px;height:44px;background:#E8F7F1;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <i class="fas fa-rocket" style="color:#2DB67D;font-size:18px;"></i>
         </div>
-
-    </section>
-
-    <section class="about-story" style="padding: 40px; margin-top: 40px; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <h2 style="margin-bottom: 20px; color: #10003c; font-family: 'Orbitron', sans-serif;">Our Story</h2>
-        <p style="line-height: 1.6; color: #555; margin-bottom: 15px;">EventLink CM was born out of a simple frustration: missing out on incredible events simply because we didn't know they were happening. We realized that Cameroon has a vibrant culture filled with concerts, tech meetups, business forums, and educational workshops, but there was no central hub to find them.</p>
-        <p style="line-height: 1.6; color: #555;">In 2026, we launched EventLink CM to bridge that gap. Today, we are proud to connect thousands of event-goers with passionate organizers across Douala, Yaoundé, Buea, Bamenda, and beyond.</p>
-    </section>
-
-    <section class="about-team" style="padding: 40px 0; margin-top: 40px; text-align: center;">
-        <h2 style="margin-bottom: 30px; color: #10003c; font-family: 'Orbitron', sans-serif;">Meet the Team</h2>
-        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-            <div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); width: 250px;">
-                <div style="width: 100px; height: 100px; background: #28a745; border-radius: 50%; margin: 0 auto 15px;"></div>
-                <h3>Founder & CEO</h3>
-                <p style="color: #777;">Driving the vision for a connected Cameroon.</p>
-            </div>
-            <div style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); width: 250px;">
-                <div style="width: 100px; height: 100px; background: #10003c; border-radius: 50%; margin: 0 auto 15px;"></div>
-                <h3>Lead Developer</h3>
-                <p style="color: #777;">Building the platform architecture.</p>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-
-
-
-<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
-            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
-        </div>
-        <div style="flex: 1; min-width: 200px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
-                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
-                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
-                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
-                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
-            </ul>
-        </div>
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
-            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
-        </div>
+        <h3 style="font-size:18px;margin-bottom:10px;">Our Mission</h3>
+        <p style="color:#5A5E58;font-size:14px;line-height:1.7;">Empower organisers to reach their audience and help participants discover life-changing opportunities — all for free.</p>
+      </div>
     </div>
-    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
-        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        <h2 style="font-size:clamp(22px,3vw,32px);margin-bottom:18px;">Our Story</h2>
+        <p style="color:#5A5E58;line-height:1.8;margin-bottom:16px;">EventLink CM was founded in 2026 by a group of young Cameroonians who were tired of missing great events. Whether it was a tech hackathon in Douala, a music night in Yaoundé, or a business forum in Buea — the information was scattered across WhatsApp groups, flyers, and word of mouth.</p>
+        <p style="color:#5A5E58;line-height:1.8;margin-bottom:16px;">We built EventLink CM to be the single source of truth for events in Cameroon. Organisers get a powerful, free platform to create and manage events. Participants get beautiful event listings, free digital tickets, and QR-based attendance tracking.</p>
+        <p style="color:#5A5E58;line-height:1.8;">Today, EventLink CM proudly hosts events across Yaoundé, Douala, Buea, Bamenda, and beyond.</p>
+      </div>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.10);">
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=700&auto=format&fit=crop&q=80" alt="Team organising an event" style="width:100%;display:block;">
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- DARK STATS SECTION -->
+<section style="background:#1C1E1B;padding:64px 5%;color:#fff;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">
+      <div>
+        <div style="font-size:40px;font-weight:800;color:#2DB67D;">500+</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:6px;">Events hosted</div>
+      </div>
+      <div>
+        <div style="font-size:40px;font-weight:800;color:#2DB67D;">10K+</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:6px;">Registered users</div>
+      </div>
+      <div>
+        <div style="font-size:40px;font-weight:800;color:#2DB67D;">5</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:6px;">Cities covered</div>
+      </div>
+      <div>
+        <div style="font-size:40px;font-weight:800;color:#2DB67D;">100%</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:14px;margin-top:6px;">Free to use</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to join EventLink CM?</h2>
+    <p>Create your free account and start discovering or hosting events today.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/register" class="btn btn-white btn-lg">Create free account</a>
+      <a href="/events" class="btn btn-lg" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">Browse events</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Event<span>Link</span> CM</div>
+        <p>Your platform to discover and attend events across Cameroon.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/events">Browse Events</a></li>
+          <li><a href="/create-event">Host an Event</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Douala, Cameroon</p>
+        <p><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 EventLink CM · Made in 🇨🇲 Cameroon</span>
+    </div>
+  </div>
 </footer>
 
-
-
-
-<script src="js/about.js"></script>
-
+<script>
+function toggleNav() {
+  document.getElementById('navLinks')?.classList.toggle('open');
+}
+</script>
 </body>
 </html>

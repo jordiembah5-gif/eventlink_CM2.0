@@ -1,51 +1,50 @@
+function showMsg(el, text, type) {
+  el.textContent = text;
+  el.className = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-error');
+  el.style.display = 'block';
+}
+
 async function loginUser(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const message = document.getElementById("message");
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const msgEl    = document.getElementById('message');
 
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
+  try {
+    const res  = await fetch('/api/login', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      showMsg(msgEl, 'Logged in! Redirecting…', 'success');
+      localStorage.setItem('currentUser', email);
+
+      // Process any pending RSVP
+      const pending = localStorage.getItem('pendingRSVP');
+      if (pending) {
+        try {
+          await fetch(`/api/events/${pending}/rsvp`, {
+            method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            message.textContent = "Login successful!";
-            localStorage.setItem("currentUser", email);
-            
-            // Automatically process any pending RSVPs
-            const pendingRSVP = localStorage.getItem("pendingRSVP");
-            if (pendingRSVP) {
-                try {
-                    await fetch(`/api/events/${pendingRSVP}/rsvp`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: email })
-                    });
-                    localStorage.removeItem("pendingRSVP");
-                } catch (e) {
-                    console.error("Failed to process pending RSVP", e);
-                }
-            }
+            body:    JSON.stringify({ email })
+          });
+          localStorage.removeItem('pendingRSVP');
+        } catch (e) { console.warn('Pending RSVP failed', e); }
+      }
 
-            setTimeout(function() {
-                const redirect = localStorage.getItem("redirectAfterLogin");
-                if (redirect) {
-                    localStorage.removeItem("redirectAfterLogin");
-                    window.location.href = redirect;
-                } else {
-                    window.location.href = "/user-home";
-                }
-            }, 1000);
-        } else {
-            message.textContent = data.detail || "Invalid email or password.";
-        }
-    } catch (error) {
-        message.textContent = "An error occurred connecting to the server.";
+      setTimeout(() => {
+        const redirect = localStorage.getItem('redirectAfterLogin');
+        if (redirect) { localStorage.removeItem('redirectAfterLogin'); window.location.href = redirect; }
+        else          { window.location.href = '/user-home'; }
+      }, 800);
+    } else {
+      showMsg(msgEl, data.detail || 'Incorrect email or password.', 'error');
     }
+  } catch {
+    showMsg(msgEl, 'Could not connect to the server. Please try again.', 'error');
+  }
 }
