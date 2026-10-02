@@ -1,248 +1,444 @@
- EventLink CM 🇨🇲
+ EventLink CM 🎫🇨🇲
 
-EventLink CM is a web-based event management and participation platform designed to connect event organizers with participants in Cameroon.
+Connect • Discover • Experience
 
-The platform allows organizers to create and manage events, monitor registrations and attendance, while participants can discover events, register for free tickets, receive event information, and access their tickets through a personal dashboard.
+EventLink CM is a web-based event discovery and management platform designed to connect event organizers with participants across Cameroon.
+
+The platform allows users to discover available events, create accounts, register for events, organize events, manage RSVPs, and track attendance through QR-code scanning and event analytics.
 
 ⸻
 
 📌 Project Overview
 
-EventLink CM aims to make event organization and participation easier by bringing the entire event process into one platform.
+Finding and participating in events can be difficult when event information is scattered across different platforms and communication channels.
 
-Instead of relying on scattered social media posts, messages, spreadsheets, or manual attendance lists, EventLink CM provides a centralized system where organizers and participants can interact with events.
+EventLink CM provides a centralized platform where:
 
-Main Users
+* Participants can discover events.
+* Users can create accounts and log in.
+* Participants can search and filter events.
+* Participants can RSVP to events.
+* Organizers can create and manage their events.
+* Organizers can view registered participants.
+* Event attendance can be recorded through QR-code scanning.
+* Organizers can view event attendance analytics.
+* The application provides a simple, responsive interface for users.
 
-* Organizers — Create and manage events and monitor participants.
-* Participants — Discover events, register, and manage their tickets.
-* Administrators — Manage users, events, and platform data.
-
-⸻
-
-✨ Features
-
-👤 User Accounts
-
-* Participant registration
-* Organizer registration
-* User login and logout
-* Email verification
-* Password reset
-* Separate organizer and participant dashboards
-* User profile management
-
-📅 Event Management
-
-Organizers can:
-
-* Create events
-* Edit events
-* Publish and manage events
-* Add event descriptions
-* Set event dates and locations
-* Set participant limits
-* Monitor registrations
-* View registered participants
-* Manage event attendance
-
-🔎 Event Discovery
-
-Participants can:
-
-* Browse available events
-* View event details
-* Search for events
-* Filter events
-* Register for launched events
-* View their registered events
-
-🎟️ Free Tickets
-
-The current version focuses on free event tickets.
-
-Participants can:
-
-* Register for free events
-* Receive a digital ticket
-* View their tickets from their dashboard
-* Access a QR code associated with their ticket
-
-Payment integration such as MTN Mobile Money and Orange Money is not included in the current phase.
-
-📱 QR Code Attendance
-
-EventLink CM supports QR-based attendance management.
-
-Organizers can:
-
-* Scan participant QR codes
-* Mark participants as present
-* Identify registered participants who have not checked in
-* Monitor attendance
-
-📊 Reports
-
-Organizers can access attendance information, including:
-
-* Total registered participants
-* Number of participants present
-* Number of participants absent
-* Attendance statistics
-* Event participation information
-
-🌍 Language Support
-
-The platform is designed to support:
-
-* 🇬🇧 English
-
+The project is developed as an academic software-development project with the goal of demonstrating the design and implementation of a real-world event management solution.
 
 ⸻
 
-🛠️ Technology Stack
+🎯 Aim
+
+The main aim of EventLink CM is to provide a simple and accessible digital platform for discovering, organizing and participating in events in Cameroon.
+
+⸻
+
+🎯 Objectives
+
+The project objectives are to:
+
+1. Create a centralized platform for event discovery.
+2. Allow users to register and log in to the platform.
+3. Allow organizers to create events.
+4. Allow participants to browse and search for events.
+5. Allow participants to RSVP to events.
+6. Keep track of event registrations.
+7. Support QR-based attendance scanning.
+8. Provide organizers with attendance information and analytics.
+9. Provide a responsive and user-friendly interface.
+10. Provide a foundation that can be expanded with additional event-management features.
+
+⸻
+
+✨ Main Features
+
+👤 User Registration
+
+Users can create an EventLink CM account using:
+
+* Name
+* Email address
+* Password
+* Gender
+
+The backend checks whether an email address has already been registered.
+
+🔐 Login
+
+Registered users can log in using their email address and password.
+
+📅 Event Discovery
+
+Users can view available events and obtain information such as:
+
+* Event name
+* Category
+* Location
+* Date
+* Event image/icon
+* Organizer
+
+🔎 Event Search and Filtering
+
+The frontend provides event searching and category filtering.
+
+Available categories include examples such as:
+
+* Music
+* Business
+* Technology
+* Education
+
+📝 Event RSVP
+
+Participants can register for an event through the RSVP functionality.
+
+The system prevents the same user from registering for the same event more than once.
+
+🏗️ Event Creation
+
+Organizers can create events by providing information such as:
+
+* Event name
+* Category
+* Location
+* Date
+* Event image/icon
+* Organizer email
+
+📊 Event Analytics
+
+Organizers can retrieve information about their events, including:
+
+* Total RSVPs
+* Number of participants who arrived
+* Participant information
+* Gender breakdown
+* Attendance status
+* Arrival time
+
+🎟️ QR Attendance Scanning
+
+The backend provides an attendance-scanning endpoint.
+
+When an RSVP is scanned:
+
+1. The system identifies the participant.
+2. The participant’s RSVP is located.
+3. The RSVP is marked as scanned.
+4. The arrival time is recorded.
+5. The system returns the attendance result.
+
+The system also prevents an already-scanned ticket from being counted as a new attendance.
+
+⸻
+
+🏗️ System Architecture
+
+EventLink CM uses a simple client-server architecture.
+
+┌──────────────────────────────┐
+│        USER / BROWSER        │
+│                              │
+│ HTML + CSS + JavaScript      │
+└──────────────┬───────────────┘
+               │
+               │ HTTP Requests
+               ▼
+┌──────────────────────────────┐
+│          FASTAPI             │
+│          Backend             │
+│                              │
+│ Authentication               │
+│ Event Management             │
+│ RSVP Management              │
+│ Attendance                   │
+│ Analytics                    │
+└──────────────┬───────────────┘
+               │
+               │ SQLAlchemy ORM
+               ▼
+┌──────────────────────────────┐
+│           SQLite             │
+│                              │
+│ Users                        │
+│ Events                       │
+│ RSVPs                        │
+└──────────────────────────────┘
+
+⸻
+
+🛠️ Technologies Used
 
 Frontend
 
-* HTML5
-* CSS3
-* JavaScript
-* Bootstrap
+Technology	Purpose
+HTML5	Structure of web pages
+CSS3	Styling and responsive design
+JavaScript	Client-side interaction
+Responsive CSS	Mobile and desktop layouts
 
 Backend
 
-* Python
-* Django
+Technology	Purpose
+Python	Backend programming language
+FastAPI	Web framework and REST API
+Uvicorn	ASGI server
+Pydantic	Request/data validation
+SQLAlchemy	Database ORM
 
 Database
 
-* PostgreSQL
+Technology	Purpose
+SQLite	Local application database
+SQLAlchemy	Communication between Python and SQLite
 
 Development Tools
 
 * Git
 * GitHub
-* GitHub Codespaces
-* pgAdmin 4
-
-Deployment
-
-The project is designed to support deployment using platforms such as:
-
-* Render
+* Visual Studio Code / Codespaces
+* Python virtual environment
+* Browser developer tools
 
 ⸻
 
 📂 Project Structure
 
-EventLink-CM/
+The repository currently follows a structure similar to:
+
+eventlink_CM2.0/
 │
-├── manage.py
-├── requirements.txt
-├── .env
-├── .env.example
-├── .gitignore
 ├── README.md
-├── render.yaml
-├── Procfile
+├── requirements.txt
+├── .gitignore
 │
-├── core/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── asgi.py
-│   └── wsgi.py
+├── main.py
+├── database.py
+├── models.py
+├── schemas.py
+├── test_backend.py
 │
-├── api/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── serializers.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── permissions.py
-│   ├── utils.py
-│   ├── tests.py
-│   │
-│   └── migrations/
-│       └── __init__.py
+├── FastAPI_Documentation.md
 │
-├── templates/
-│   ├── base.html
-│   ├── index.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── events.html
-│   ├── event_detail.html
-│   │
-│   ├── accounts/
-│   │   ├── login.html
-│   │   ├── register.html
-│   │   ├── organizer_register.html
-│   │   ├── participant_register.html
-│   │   ├── verify_email.html
-│   │   ├── verification_success.html
-│   │   ├── forgot_password.html
-│   │   └── reset_password.html
-│   │
-│   ├── organizer/
-│   │   ├── dashboard.html
-│   │   ├── profile.html
-│   │   ├── events.html
-│   │   ├── create_event.html
-│   │   ├── edit_event.html
-│   │   ├── participants.html
-│   │   ├── attendance.html
-│   │   └── reports.html
-│   │
-│   └── participant/
-│       ├── dashboard.html
-│       ├── profile.html
-│       ├── events.html
-│       ├── event_detail.html
-│       ├── my_tickets.html
-│       ├── ticket_detail.html
-│       └── notifications.html
+├── add_qr.py
+├── apply_futuristic.py
+├── fix_reg.py
+├── patch_date.py
+├── refactor_pages.py
+├── update_icons.py
 │
-├── static/
-│   ├── css/
-│   │   ├── style.css
-│   │   ├── auth.css
-│   │   ├── dashboard.css
-│   │   ├── events.css
-│   │   └── ticket.css
-│   │
-│   ├── js/
-│   │   ├── main.js
-│   │   ├── auth.js
-│   │   ├── events.js
-│   │   ├── dashboard.js
-│   │   ├── ticket.js
-│   │   └── qr-scanner.js
-│   │
-│   └── images/
-│       ├── logo.png
-│       ├── hero.jpg
-│       └── placeholders/
+├── generate_doc.py
+├── generate_team_doc.py
+├── generate_three_docs.py
+├── generate_ultimate_doc.py
 │
-└── ...
+└── EventLink CM Project/
+    │
+    └── frontend/
+        │
+        ├── index.html
+        ├── about.html
+        ├── events.html
+        ├── contact.html
+        ├── login.html
+        ├── register.html
+        ├── create-event.html
+        ├── dashboard.html
+        ├── user-home.html
+        ├── organized.html
+        ├── analytics.html
+        │
+        ├── css/
+        │   ├── home.css
+        │   ├── about.css
+        │   ├── auth.css
+        │   ├── contact.css
+        │   └── events.css
+        │
+        ├── js/
+        │   ├── home.js
+        │   ├── about.js
+        │   ├── contact.js
+        │   ├── events.js
+        │   ├── login.js
+        │   └── register.js
+        │
+        └── images/
+            └── background.jpeg
 
 ⸻
 
-🚀 Getting Started
+🗄️ Database Design
 
-1. Clone the Repository
+The application currently uses SQLite through SQLAlchemy.
+
+The main database tables are:
+
+Users
+
+Stores registered user information.
+
+Users
+-------------------------
+email       PRIMARY KEY
+name
+password
+gender
+
+Events
+
+Stores event information.
+
+Events
+-------------------------
+id              PRIMARY KEY
+name
+category
+location
+date
+icon
+created_by
+
+RSVPs
+
+Stores participant registrations and attendance information.
+
+RSVPs
+-------------------------
+id              PRIMARY KEY
+event_id
+user_email
+scanned
+time_arrived
+
+Conceptually:
+
+       ┌─────────────┐
+       │    USER     │
+       └──────┬──────┘
+              │
+              │ registers
+              ▼
+       ┌─────────────┐
+       │    RSVP     │
+       └──────┬──────┘
+              │
+              │ belongs to
+              ▼
+       ┌─────────────┐
+       │    EVENT    │
+       └─────────────┘
+
+⸻
+
+🔌 API Endpoints
+
+The FastAPI backend provides endpoints for the main application operations.
+
+Authentication
+
+Register
+
+POST /api/register
+
+Registers a new user.
+
+Login
+
+POST /api/login
+
+Authenticates an existing user.
+
+⸻
+
+Events
+
+Get Events
+
+GET /api/events
+
+Returns the available events.
+
+Create Event
+
+POST /api/events
+
+Creates a new event.
+
+Event Analytics
+
+GET /api/events/{event_id}/analytics
+
+Returns attendance and participant analytics for an event.
+
+⸻
+
+RSVP
+
+Register for an Event
+
+POST /api/events/{event_id}/rsvp
+
+Creates an RSVP for a participant.
+
+Get User RSVPs
+
+GET /api/users/{email}/rsvps
+
+Returns events registered by a participant.
+
+Get Organized Events
+
+GET /api/users/{email}/organized
+
+Returns events created by an organizer.
+
+⸻
+
+Attendance
+
+Scan Ticket
+
+POST /api/events/{event_id}/scan
+
+Marks an RSVP as attended and records the arrival time.
+
+⸻
+
+🌐 Frontend Routes
+
+The FastAPI application serves the frontend pages through routes such as:
+
+Route	Page
+/	Home
+/about	About
+/events	Events
+/contact	Contact
+/login	Login
+/register	Registration
+/create-event	Create Event
+/dashboard	Dashboard
+/user-home	Participant Home
+/organized	Organized Events
+/analytics	Event Analytics
+
+⸻
+
+⚙️ Installation
+
+1. Clone the repository
 
 git clone https://github.com/jordiembah5-gif/eventlink_CM2.0.git
 
-Move into the project directory:
+Move into the project:
 
-cd EventLink-CM
+cd eventlink_CM2.0
 
 ⸻
 
-2. Create a Virtual Environment
+2. Create a virtual environment
 
 Windows
 
@@ -262,237 +458,335 @@ source venv/bin/activate
 
 ⸻
 
-3. Install Dependencies
+3. Install dependencies
 
 pip install -r requirements.txt
 
-⸻
+The current requirements include:
 
-🗄️ PostgreSQL Database Setup
-
-EventLink CM uses PostgreSQL as its database.
-
-Create a PostgreSQL database using PostgreSQL or pgAdmin 4.
-
-Example database configuration:
-
-DB_NAME=eventlink_cm
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-
-The actual values should be stored in the .env file and should not be committed to GitHub.
+fastapi
+uvicorn
+sqlalchemy
+pydantic
 
 ⸻
 
-🔐 Environment Variables
+▶️ Running the Application
 
-Create a .env file in the project root.
+Start the FastAPI server using:
 
-Example:
+uvicorn main:app --reload
 
-SECRET_KEY=your-django-secret-key
-DEBUG=True
-DB_NAME=eventlink_cm
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_HOST=localhost
-DB_PORT=5432
-EMAIL_HOST=smtp.example.com
-EMAIL_PORT=587
-EMAIL_HOST_USER=your-email@example.com
-EMAIL_HOST_PASSWORD=your-email-password
-EMAIL_USE_TLS=True
+The application should then be available at:
 
-Never upload passwords, API keys, database credentials, or other secrets to GitHub.
+http://127.0.0.1:8000
+
+or:
+
+http://localhost:8000
 
 ⸻
 
-🧱 Database Migrations
+📚 API Documentation
 
-After configuring PostgreSQL, run:
+FastAPI automatically provides interactive API documentation.
 
-python manage.py makemigrations
+After starting the server, open:
 
-Then:
+http://127.0.0.1:8000/docs
 
-python manage.py migrate
+The alternative documentation interface is available at:
 
-⸻
+http://127.0.0.1:8000/redoc
 
-👨‍💻 Create an Administrator
-
-Create a Django superuser:
-
-python manage.py createsuperuser
-
-Follow the instructions in the terminal.
-
-⸻
-
-▶️ Run the Development Server
-
-Start the Django development server:
-
-python manage.py runserver
-
-The website will normally be available at:
-
-http://127.0.0.1:8000/
-
-You can also use:
-
-http://localhost:8000/
+These interfaces can be used to inspect and test the API endpoints.
 
 ⸻
 
 🧪 Testing
 
-Run the Django test suite with:
+The repository contains a backend testing file:
 
-python manage.py test
+test_backend.py
 
-You can also check the project configuration with:
+Backend functionality should be tested after starting the application.
 
-python manage.py check
+The main areas to test include:
+
+* User registration
+* Duplicate registration prevention
+* User login
+* Invalid login
+* Event retrieval
+* Event creation
+* Event RSVP
+* Duplicate RSVP prevention
+* User RSVP retrieval
+* Organizer event retrieval
+* Attendance scanning
+* Duplicate attendance scanning
+* Event analytics
 
 ⸻
 
-🔄 Development Workflow
+🔄 Application Workflow
 
-The project can be developed collaboratively using Git and GitHub.
+The general participant workflow is:
 
-A typical workflow is:
+Open EventLink CM
+       │
+       ▼
+Browse Events
+       │
+       ▼
+Select Event
+       │
+       ▼
+Login / Register
+       │
+       ▼
+RSVP
+       │
+       ▼
+Receive/Use Event Ticket
+       │
+       ▼
+Attend Event
+       │
+       ▼
+QR / Ticket Scan
+       │
+       ▼
+Attendance Recorded
 
-git pull origin main
+The organizer workflow is:
 
-Create or switch to a feature branch:
+Login
+  │
+  ▼
+Organizer Dashboard
+  │
+  ▼
+Create Event
+  │
+  ▼
+Publish Event
+  │
+  ▼
+Participants RSVP
+  │
+  ▼
+View Registrations
+  │
+  ▼
+Scan Attendance
+  │
+  ▼
+View Analytics
+
+⸻
+
+🔒 Security Considerations
+
+EventLink CM is currently an academic/development project and should not be considered production-ready without additional security work.
+
+Future security improvements should include:
+
+* Password hashing.
+* Secure authentication tokens/session management.
+* Role-based access control.
+* Input sanitization and validation.
+* HTTPS in production.
+* Environment variables for sensitive configuration.
+* Protection against unauthorized event modification.
+* Protection against unauthorized attendance scanning.
+* Database constraints and stronger relationship management.
+* Rate limiting for authentication endpoints.
+
+Important: Sensitive credentials should never be committed to the repository.
+
+⸻
+
+🚧 Current Limitations
+
+The current version is an evolving project. Some functionality may still require further integration and refinement.
+
+Current limitations include:
+
+* Authentication is still basic.
+* Production-grade password security needs to be implemented.
+* SQLite is currently used for local development.
+* Some frontend pages are static or partially integrated.
+* Payment functionality is not currently implemented.
+* Email verification is not yet part of the current core implementation.
+* Full production-grade authorization still needs to be added.
+* QR attendance functionality requires further frontend integration for a complete scanning experience.
+
+⸻
+
+🔮 Future Improvements
+
+Future versions of EventLink CM can include:
+
+Authentication
+
+* Email verification.
+* Password reset.
+* Secure password hashing.
+* Role-based authentication.
+* Organizer and participant profiles.
+
+Event Management
+
+* Event editing and deletion.
+* Event images.
+* Event capacity limits.
+* Event status management.
+* Event reminders.
+* Event recommendations.
+
+Tickets
+
+* Unique digital tickets.
+* QR-code generation.
+* QR-code scanner interface.
+* Downloadable tickets.
+* Attendance history.
+
+Payments
+
+A future version could support local payment services such as:
+
+* MTN Mobile Money.
+* Orange Money.
+
+Payment integration is intentionally outside the current core implementation.
+
+Communication
+
+* Email notifications.
+* Event reminders.
+* Organizer announcements.
+* Participant notifications.
+
+Analytics
+
+* Attendance charts.
+* Registration statistics.
+* Event performance reports.
+* Exportable reports.
+* PDF attendance reports.
+
+Localization
+
+The platform can also be expanded to support both:
+
+* English
+* French
+
+to make the system more accessible to users across Cameroon.
+
+⸻
+
+🧑‍💻 Development Methodology
+
+The project follows an iterative software-development approach inspired by Agile/Scrum.
+
+Development activities can be divided into:
+
+1. Requirement analysis
+2. System design
+3. Database design
+4. Backend development
+5. Frontend development
+6. API integration
+7. Testing
+8. Debugging
+9. Documentation
+10. Deployment
+
+The team can use GitHub branches to allow different members to work on separate parts of the application before integrating their work.
+
+⸻
+
+🌿 Git Workflow
+
+A recommended workflow is:
 
 git checkout -b feature-name
 
-Make your changes, then:
+Make changes, then:
 
 git add .
-
-Commit:
-
 git commit -m "Describe your changes"
-
-Push the branch:
-
 git push origin feature-name
 
-Create a Pull Request on GitHub and merge the completed work into main after review.
+After testing, the feature branch can be merged into the main development branch.
 
 ⸻
 
-👥 Suggested Team Responsibilities
+👥 Team Collaboration
 
-Person 1 — Infrastructure & Configuration
+Team members can divide development responsibilities into areas such as:
 
-Responsible for:
-
-* Django project setup
-* Settings
-* Environment variables
-* PostgreSQL connection
-* Dependencies
-* Deployment configuration
-
-Person 2 — Data & Backend
-
-Responsible for:
-
-* Database models
-* Django admin
-* Serializers
-* Backend logic
-* Permissions
-* APIs
-
-Person 3 — Frontend
-
-Responsible for:
-
-* HTML templates
-* CSS
-* JavaScript
-* Responsive design
-* User interface
-* Connecting frontend pages to Django
-
-Integration
-
-The completed branches should be integrated into the main project and tested together before deployment.
+Role	Responsibility
+Project/Infrastructure Lead	Repository, environment and application configuration
+Backend/API Developer	FastAPI endpoints and business logic
+Frontend Developer	HTML, CSS and JavaScript interfaces
+Database Developer	SQLAlchemy models and database structure
+Testing/Documentation	Testing, bug tracking and project documentation
 
 ⸻
 
-🔐 Security
+📖 Project Documentation
 
-The following information should never be committed to GitHub:
+Additional technical documentation is available in:
 
-* Database passwords
-* Django secret keys
-* Email passwords
-* API keys
-* Authentication tokens
-* Private credentials
+FastAPI_Documentation.md
 
-Use .env for local secrets.
-
-The .gitignore file should include:
-
-.env
-venv/
-__pycache__/
-*.pyc
-db.sqlite3
+The repository also contains scripts used during different stages of development and documentation generation.
 
 ⸻
 
-📈 Future Improvements
+📌 Project Status
 
-Possible future versions of EventLink CM may include:
+Status: 🚧 Active Development
 
-* MTN Mobile Money payments
-* Orange Money payments
-* Paid event tickets
-* Advanced event recommendations
-* Push notifications
-* SMS notifications
-* Advanced analytics
-* Event reviews and ratings
-* Organizer verification
-* Participant certificates
-* Mobile application
-* Improved QR attendance system
-* Automated PDF reports
+EventLink CM currently provides the foundation for:
 
-⸻
+* User registration
+* Login
+* Event discovery
+* Event creation
+* RSVP management
+* Attendance tracking
+* Event analytics
+* Frontend/backend integration
 
-🎯 Project Goal
-
-EventLink CM aims to provide a simple and centralized way for people to discover, organize, register for, and attend events.
-
-The project focuses on making event participation easier for participants while reducing the manual work required by event organizers.
+Further development is required before the system should be considered a fully production-ready event-management platform.
 
 ⸻
 
-📞 Contact
+📜 License
 
-For questions, suggestions, collaboration, or support, contact the EventLink CM team through the project’s official contact channel.
+This project was developed as an academic/project-based software application.
 
-⸻
-
-📄 License
-
-This project is currently intended for educational and development purposes.
-
-A formal open-source license can be added when the project is ready for public distribution.
+Unless a separate license is added to the repository, the project should not be assumed to grant permission for unrestricted commercial redistribution or reuse.
 
 ⸻
 
-🇨🇲 EventLink CM
+👨‍💻 Repository
 
-Connecting organizers. Connecting participants. Connecting events.p
+GitHub Repository:
+
+https://github.com/jordiembah5-gif/eventlink_CM2.0
+
+⸻
+
+❤️ About EventLink CM
+
+EventLink CM is built around a simple idea:
+
+Make it easier for people to discover events, participate in them, and connect with their community.
+
+EventLink CM — Connect • Discover • Experience 🇨🇲
