@@ -1,0 +1,170 @@
+/* ==============================================================================
+   CHAPTER 6: CSS - THE PAINT AND DECORATION (futuristic.css)
+   ==============================================================================
+   Welcome to CSS (Cascading Style Sheets)! 
+   If HTML builds the walls and doors of our house, CSS is the interior designer.
+   It controls colors, fonts, spacing, and animations.
+   
+   How it works:
+   1. You select a target (e.g., "body" or a specific class like ".navbar").
+   2. You give it rules (e.g., "color: blue").
+   ============================================================================== */
+
+/* This line imports a beautiful font called "Inter" from Google's free font library */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ------------------------------------------------------------------------------
+   1. THE BODY (The entirely of the webpage)
+   ------------------------------------------------------------------------------ */
+/* Selecting "body" means these rules apply to the entire website background. */
+body {
+    background-color: #FBFBFD !important; /* A very light, clean gray/white */
+    color: #1D1D1F !important;            /* Dark gray for the text (easier on eyes than pure black) */
+    
+    /* We tell the browser to use our imported "Inter" font. 
+       If it fails, it falls back to Arial or sans-serif. */
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    
+    /* These smooth out the jagged edges of text on modern screens */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------------------------------------------------------------
+   2. TYPOGRAPHY (Headers and Logos)
+   ------------------------------------------------------------------------------ */
+/* You can select multiple things at once by separating them with commas. */
+h1, h2, h3, .logo {
+    font-family: inherit !important;
+    color: #1D1D1F !important;
+    font-weight: 700 !important; /* Makes the text bold and thick */
+}
+
+/* ------------------------------------------------------------------------------
+   3. CLASSES (Reusable Styles)
+   ------------------------------------------------------------------------------ */
+/* 
+   A dot (.) means we are selecting a "class".
+   In HTML, if you write <div class="navbar">, this CSS will find it and style it!
+*/
+.navbar {
+    /* rgba is a color format: Red, Green, Blue, Alpha(Transparency). 0.72 means 72% solid. */
+    background: rgba(255, 255, 255, 0.72) !important;
+    
+    /* 'backdrop-filter' is a modern trick that creates a frosted-glass blur effect behind the navbar! */
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    
+    /* Adds a tiny, almost invisible line at the bottom of the navbar to separate it */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ------------------------------------------------------------------------------
+   4. HOVER STATES (Interactivity)
+   ------------------------------------------------------------------------------ */
+/* The ":hover" pseudo-class tells CSS what to do when the user's mouse rests on the button. */
+.primary-btn:hover, button:hover {
+    background: #0077ED !important; /* Slightly brighter blue */
+    /* Make the shadow larger to make the button look like it is lifting off the page */
+    box-shadow: 0 6px 20px rgba(0, 113, 227, 0.4) !important;
+    /* Move the button 1 pixel UP on the Y-axis */
+    transform: translateY(-1px) !important;
+}
+
+/* ------------------------------------------------------------------------------
+   5. GENERAL COMPONENTS (Buttons & Inputs)
+   ------------------------------------------------------------------------------ */
+/* We style the primary buttons to look like modern pill-shaped SaaS buttons. */
+.primary-btn, button, .register-btn {
+    background: #0071E3 !important; /* Apple Blue */
+    color: #ffffff !important;      /* White text */
+    border: none !important;        /* Remove the ugly default borders */
+    
+    /* 'border-radius: 999px' makes the corners completely round (a pill shape) */
+    border-radius: 999px !important; 
+    
+    /* 'padding' is the inner space between the text and the edge of the button */
+    padding: 12px 24px !important;
+    font-weight: 600 !important;
+    
+    /* 'transition' makes the hover animations smooth (taking 0.3 seconds) instead of instant */
+    transition: all 0.3s ease !important;
+    cursor: pointer; /* Changes the mouse arrow into a clicking hand */
+}
+
+/* Modern text input boxes for forms */
+input, select, textarea {
+    background: #F5F5F7 !important;
+    color: #1D1D1F !important;
+    border-radius: 12px !important; /* Slightly rounded corners */
+    padding: 14px !important;
+    border: 1px solid transparent !important;
+    transition: all 0.2s ease !important;
+}
+
+/* When the user clicks inside an input box, it "focuses". */
+input:focus, select:focus, textarea:focus {
+    border-color: #0071E3 !important; /* Give it a blue border */
+    background: #ffffff !important;   /* Turn the background pure white */
+    outline: none !important;
+    /* Create a glowing blue ring around the box */
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1) !important;
+}
+
+/* ------------------------------------------------------------------------------
+   6. CARDS AND LAYOUT
+   ------------------------------------------------------------------------------ */
+/* These rules make our event cards look like premium physical cards floating on the screen. */
+.event-card, .quick-card, .auth-box, .about-box {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    
+    /* Adds a very soft shadow below the card */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04) !important;
+    border-radius: 18px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.event-card:hover, .quick-card:hover {
+    transform: translateY(-4px) !important; /* Float up 4 pixels when hovered */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important; /* Shadow gets darker/bigger */
+}
+
+.hero {
+    background: #FBFBFD !important;
+    text-align: center;
+    padding: 150px 10% 80px 10% !important;
+    
+    /* Flexbox is a layout mode that makes centering and aligning things very easy! */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 56px !important;
+    font-weight: 800 !important;
+    letter-spacing: -1.5px !important; /* Squeezes the letters slightly closer together */
+    margin-bottom: 24px !important;
+}
+
+.hero .intro {
+    color: #86868B !important;
+    font-size: 20px !important;
+    max-width: 600px;
+    margin: 0 auto 40px auto !important; /* Centers the text block horizontally */
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Adds 15 pixels of space between the buttons */
+    width: 100%;
+}
+
+.event-icon img, .quick-card img {
+    border-radius: 12px !important;
+    width: 100%;
+    /* 'object-fit: cover' ensures the image fills the space without stretching/distorting */
+    object-fit: cover; 
+}

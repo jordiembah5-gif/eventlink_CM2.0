@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventLink CM | Organized Events</title>
+    <link rel="stylesheet" href="css/events.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/futuristic.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="/" class="logo">EventLink <span>CM</span></a>
+    <nav id="navMenu">
+        <a href="/">Home</a>
+        <a href="/events">Events</a>
+        <a href="/dashboard">My Tickets</a>
+        <a href="/organized" class="active" style="font-weight: 700; color: #0071E3 !important;">Organized Events</a>
+        <a href="/create-event">Create Event</a>
+        <button onclick="logout()" class="secondary-btn" style="padding: 8px 16px !important;">Logout</button>
+    </nav>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+</header>
+
+<main class="page" style="padding-top: 100px;">
+    <h1 style="text-align: center; margin-bottom: 10px;">Events Organized by You</h1>
+    <p style="text-align: center; color: #86868B; margin-bottom: 40px;">Manage your events and view attendance analytics.</p>
+
+    <div class="event-grid" id="organizedGrid">
+        <p style="text-align: center; width: 100%;">Loading your events...</p>
+    </div>
+</main>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("navMenu");
+        menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    function logout() {
+        localStorage.removeItem("currentUser");
+        window.location.href = "/";
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const currentUserEmail = localStorage.getItem("currentUser");
+        if (!currentUserEmail) {
+            alert("You must be logged in to view organized events.");
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/users/${currentUserEmail}/organized`);
+            const data = await response.json();
+            const grid = document.getElementById("organizedGrid");
+            
+            grid.innerHTML = ""; 
+            
+            if (!data.events || data.events.length === 0) {
+                grid.innerHTML = "<p style='text-align: center; width: 100%;'>You haven't organized any events yet. <br><br><a href='/create-event' class='primary-btn' style='text-decoration: none;'>Create an Event</a></p>";
+                return;
+            }
+
+            data.events.forEach(event => {
+                const article = document.createElement("article");
+                article.className = "event-card";
+                
+                article.innerHTML = `
+                    <div class="event-icon">
+                        <img src="${event.icon}" alt="Event Image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                    </div>
+                    <h2 style="margin-bottom: 10px;">${event.name}</h2>
+                    <p style="color: #86868B; margin-bottom: 5px;"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
+                    <p style="color: #86868B; margin-bottom: 20px;"><i class="fas fa-calendar-alt"></i> ${event.date}</p>
+                    <a href="/analytics?id=${event.id}" class="primary-btn" style="text-decoration: none; display: block; text-align: center; width: 100%;">View Analytics</a>
+                `;
+                
+                grid.appendChild(article);
+            });
+        } catch (error) {
+            console.error("Error loading events:", error);
+            document.getElementById("organizedGrid").innerHTML = "<p>Failed to load events.</p>";
+        }
+    });
+</script>
+</body>
+</html>

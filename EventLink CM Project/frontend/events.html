@@ -1,209 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventLink CM | Events</title>
-
-    <link rel="stylesheet"
-          href="css/events.css">
-
+    <link rel="stylesheet" href="css/events.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background-color: white; padding: 30px; border-radius: 10px;
+            text-align: center; max-width: 400px; width: 90%;
+        }
+        .modal-content img {
+            margin: 20px 0; width: 200px; height: 200px;
+        }
+        .close-btn {
+            background-color: #f44336; color: white; border: none; padding: 10px 20px;
+            cursor: pointer; border-radius: 5px; font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="css/futuristic.css">
 </head>
-
 <body>
 
-
 <header class="navbar">
-
-    <a href="index.html" class="logo">
-        <span>EventLink</span> <span>CM</span>
-    </a>
-
+    <a href="/" class="logo"><span>EventLink</span> <span>CM</span></a>
     <nav id="navMenu">
-
-        <a href="index.html">Home</a>
-
-        <a href="events.html" class="active">
-            Events
-        </a>
-
-        <a href="about.html">About</a>
-
-        <a href="contact.html">Contact</a>
-
-        <a href="login.html" class="login-btn">
-            Login
-        </a>
-
-        <a href="register.html" class="register-btn">
-            Register
-        </a>
-
+        <a href="/">Home</a>
+        <a href="/events" class="active">Events</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/login" class="login-btn">Login</a>
+        <a href="/register" class="register-btn">Register</a>
     </nav>
-
-    <button class="menu-btn"
-            onclick="toggleMenu()">
-        ☰
-    </button>
-
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </header>
 
-
 <main class="page">
-
     <h1>Explore Events</h1>
+    <p>Find events happening around Cameroon.</p>
 
-    <p>
-        Find events happening around Cameroon.
-    </p>
-
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search events..."
-        >
-
-        <select id="categoryFilter">
-
-            <option value="all">
-                All Categories
-            </option>
-
-            <option value="music">
-                Music
-            </option>
-
-            <option value="business">
-                Business
-            </option>
-
-            <option value="technology">
-                Technology
-            </option>
-
-            <option value="education">
-                Education
-            </option>
-
-        </select>
-
-        <button onclick="filterEvents()">
-            Search
-        </button>
-
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <div class="search-box" style="margin-bottom: 0;">
+            <input type="text" id="searchInput" placeholder="Search events..." onkeyup="filterEvents()">
+            <select id="categoryFilter" onchange="filterEvents()">
+                <option value="all">All Categories</option>
+                <option value="music">Music</option>
+                <option value="business">Business</option>
+                <option value="technology">Technology</option>
+                <option value="education">Education</option>
+            </select>
+        </div>
+        <a href="/create-event" class="primary-btn" style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">+ Create Event</a>
     </div>
 
-
-    <div class="event-grid">
-
-
-        <article class="event-card"
-                 data-category="music">
-
-            <div class="event-icon">
-                🎵
-            </div>
-
-            <h2>
-                Yaoundé Music Night
-            </h2>
-
-            <p>📍 Yaoundé</p>
-
-            <p>📅 20 September 2026</p>
-
-            <button onclick="joinEvent('Yaoundé Music Night')">
-                Join Event
-            </button>
-
-        </article>
-
-
-        <article class="event-card"
-                 data-category="business">
-
-            <div class="event-icon">
-                💼
-            </div>
-
-            <h2>
-                Cameroon Business Forum
-            </h2>
-
-            <p>📍 Douala</p>
-
-            <p>📅 25 September 2026</p>
-
-            <button onclick="joinEvent('Cameroon Business Forum')">
-                Join Event
-            </button>
-
-        </article>
-
-
-        <article class="event-card"
-                 data-category="technology">
-
-            <div class="event-icon">
-                💻
-            </div>
-
-            <h2>
-                Tech Innovation Meetup
-            </h2>
-
-            <p>📍 Buea</p>
-
-            <p>📅 3 October 2026</p>
-
-            <button onclick="joinEvent('Tech Innovation Meetup')">
-                Join Event
-            </button>
-
-        </article>
-
-
-        <article class="event-card"
-                 data-category="education">
-
-            <div class="event-icon">
-                📚
-            </div>
-
-            <h2>
-                Student Skills Workshop
-            </h2>
-
-            <p>📍 Bamenda</p>
-
-            <p>📅 10 October 2026</p>
-
-            <button onclick="joinEvent('Student Skills Workshop')">
-                Join Event
-            </button>
-
-        </article>
-
-
+    <div class="event-grid" id="eventGrid">
+        <p style="text-align: center; width: 100%;">Loading events...</p>
     </div>
-
 </main>
 
+<!-- QR Code Modal -->
+<div id="qrModal" class="modal">
+    <div class="modal-content">
+        <h2 style="color: #28a745;"><i class="fas fa-check-circle"></i> Registered!</h2>
+        <p id="qrMessage">You have successfully registered for the event.</p>
+        <p>Save this QR Code for entry:</p>
+        <img id="qrImage" src="" alt="QR Code">
+        <br>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
 
-<footer>
-    <p>© 2026 EventLink CM.</p>
+
+
+<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
+            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
+                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
+                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
+                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
+            </ul>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
+        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
+    </div>
 </footer>
 
 
-<script src="js/events.js"></script>
 
+<script src="js/events.js"></script>
 </body>
 </html>

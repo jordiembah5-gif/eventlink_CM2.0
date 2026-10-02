@@ -1,48 +1,87 @@
+<!-- ==============================================================================
+   CHAPTER 7: HTML - THE STRUCTURE (index.html)
+   ==============================================================================
+   Welcome to HTML (HyperText Markup Language)! 
+   HTML is the skeleton of every website. It is made up of "tags" that wrap 
+   around text to tell the browser what that text is (e.g., a heading, a button, an image).
+   
+   Every tag is wrapped in angle brackets like <this>. 
+   Most tags have an opening tag <div> and a closing tag </div> with a slash.
+   ============================================================================== -->
+
+<!-- This tells the web browser: "Hey, I am using the newest version of HTML (HTML5)!" -->
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 
+    THE HEAD
+    The <head> section is invisible to the user. It contains the brain/metadata of the page.
+    This is where we set the title of the tab and link our CSS paint (stylesheets).
+-->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes it work on mobile phones! -->
 
     <title>EventLink CM | Home</title>
 
+    <!-- 
+        Here we link our CSS files. 
+        When the browser reads this, it downloads the CSS and paints the webpage!
+    -->
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/futuristic.css">
 </head>
 
+<!-- 
+    THE BODY
+    Everything inside the <body> tag is visible to the user on the screen.
+-->
 <body>
 
+<!-- 
+    <header> is a structural tag that tells the browser: "This is the top navigation bar."
+    The 'class="navbar"' attribute lets our CSS (futuristic.css) find this exact tag and style it.
+-->
 <header class="navbar">
 
-    <a href="index.html" class="logo">
+    <!-- <a> (Anchor tag) creates a clickable link. "href" tells it where to go when clicked. -->
+    <a href="/" class="logo">
         <span>EventLink</span> <span>CM</span>
     </a>
 
+    <!-- <nav> stands for Navigation. It groups all our menu links together. -->
     <nav id="navMenu">
-        <a href="index.html" class="active">Home</a>
-        <a href="events.html">Events</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="/" class="active">Home</a>
+        <a href="/events">Events</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
 
-        <a href="login.html" class="login-btn">Login</a>
-        <a href="register.html" class="register-btn">Register</a>
+        <a href="/login" class="login-btn">Login</a>
+        <a href="/register" class="register-btn">Register</a>
     </nav>
-
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 </header>
 
 
+<!-- 
+    <section> is like a chapter in a book. It groups a large piece of the webpage together.
+    Here we create the "Hero" section (the big welcome banner).
+-->
 <section class="hero">
 
+    <!-- <div> is an invisible box used to group elements together so we can style them. -->
     <div class="hero-content">
 
+        <!-- <p> stands for Paragraph. It is used for standard text. -->
         <p class="tagline">
             CONNECT • DISCOVER • EXPERIENCE
         </p>
 
+        <!-- <h1> is a Heading 1. It is the biggest, most important text on the page. -->
         <h1>
-            Find Events.<br>
-            <span>Make Memories.</span>
+            Find Events.<br> <!-- <br> creates a line break (like pressing Enter on a keyboard) -->
+            <span>Make Memories.</span> <!-- <span> lets us color a specific word differently using CSS -->
         </h1>
 
         <p class="intro">
@@ -51,15 +90,20 @@
         </p>
 
         <div class="hero-buttons">
-
-            <a href="events.html" class="primary-btn">
-                Explore Events
-            </a>
-
-            <a href="register.html" class="secondary-btn">
-                Create Account
-            </a>
-
+            <a href="/events" class="primary-btn">Explore Events</a>
+            
+            <!-- 
+                This button has an 'onclick' attribute. 
+                When clicked, it triggers a JavaScript function called goToCreateEvent().
+            -->
+            <button onclick="goToCreateEvent()" class="primary-btn" style="background-color: #28a745; color: white; border-color: #28a745; padding: 12px 24px; font-weight: 600; font-size: 16px;">Host an Event</button>
+            <a href="/register" class="secondary-btn" style="background: transparent; color: #1D1D1F; border: 1px solid #1D1D1F; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; border-radius: 999px;">Create Account</a>
+        </div>
+        
+        <div class="home-search-container" style="margin-top: 30px; display: flex; justify-content: center; gap: 10px;">
+            <!-- <input> creates a text box where the user can type something. -->
+            <input type="text" id="homeSearch" placeholder="Search events..." style="padding: 12px; width: 300px; border-radius: 4px; border: 1px solid #ccc;">
+            <button onclick="searchFromHome()" style="padding: 12px 24px;">Search</button>
         </div>
 
     </div>
@@ -70,7 +114,9 @@
 <section class="quick-section">
 
     <div class="quick-card">
-        <h3>🎉 Discover</h3>
+        <!-- <img> displays an image. "src" is the URL of the image. "alt" is text for blind users using screen readers. -->
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&auto=format&fit=crop&q=60" alt="Concert Event">
+        <h3>Discover</h3> <!-- <h3> is a Heading 3. Smaller than an h1 or h2. -->
         <p>
             Find concerts, workshops, conferences and other
             exciting events.
@@ -78,14 +124,16 @@
     </div>
 
     <div class="quick-card">
-        <h3>📅 Organize</h3>
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500&auto=format&fit=crop&q=60" alt="Organizing Event">
+        <h3>Organize</h3>
         <p>
             Create and share your own events with the community.
         </p>
     </div>
 
     <div class="quick-card">
-        <h3>🤝 Connect</h3>
+        <img src="https://images.unsplash.com/photo-1511632765486-a01c80cf59af?w=500&auto=format&fit=crop&q=60" alt="Networking">
+        <h3>Connect</h3>
         <p>
             Meet people and build useful connections.
         </p>
@@ -94,11 +142,45 @@
 </section>
 
 
-<footer>
-    <p>© 2026 EventLink CM. All rights reserved.</p>
+<!-- 
+    <footer> tells the browser: "This is the very bottom of the page." 
+    We use "inline styles" (style="...") here. This is a quick way to apply CSS directly to a tag 
+    without needing to use futuristic.css.
+-->
+<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
+            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
+            <!-- <ul> creates an Unordered List (bullet points). <li> creates a List Item. -->
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
+                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
+                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
+                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
+                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
+            </ul>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
+            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
+            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
+        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
+    </div>
 </footer>
 
-
+<!-- 
+    <script> tags are always placed at the VERY BOTTOM of the body.
+    Why? Because the browser loads the page from top to bottom. We want the user to see the 
+    HTML and CSS immediately before the browser starts downloading the Javascript logic.
+-->
 <script src="js/home.js"></script>
 
 </body>

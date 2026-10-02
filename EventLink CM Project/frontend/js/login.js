@@ -1,49 +1,51 @@
-function loginUser(event) {
-
+async function loginUser(event) {
     event.preventDefault();
 
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
 
-    const email =
-        document.getElementById("email").value;
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            message.textContent = "Login successful!";
+            localStorage.setItem("currentUser", email);
+            
+            // Automatically process any pending RSVPs
+            const pendingRSVP = localStorage.getItem("pendingRSVP");
+            if (pendingRSVP) {
+                try {
+                    await fetch(`/api/events/${pendingRSVP}/rsvp`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    });
+                    localStorage.removeItem("pendingRSVP");
+                } catch (e) {
+                    console.error("Failed to process pending RSVP", e);
+                }
+            }
 
-    const password =
-        document.getElementById("password").value;
-
-
-    const message =
-        document.getElementById("message");
-
-
-    const savedUser =
-        JSON.parse(
-            localStorage.getItem("eventlinkUser")
-        );
-
-
-    if (
-        savedUser &&
-        savedUser.email === email &&
-        savedUser.password === password
-    ) {
-
-        message.textContent =
-            "Login successful!";
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "events.html";
-
-        }, 1000);
-
+            setTimeout(function() {
+                const redirect = localStorage.getItem("redirectAfterLogin");
+                if (redirect) {
+                    localStorage.removeItem("redirectAfterLogin");
+                    window.location.href = redirect;
+                } else {
+                    window.location.href = "/user-home";
+                }
+            }, 1000);
+        } else {
+            message.textContent = data.detail || "Invalid email or password.";
+        }
+    } catch (error) {
+        message.textContent = "An error occurred connecting to the server.";
     }
-
-    else {
-
-        message.textContent =
-            "Invalid email or password.";
-
-    }
-
 }

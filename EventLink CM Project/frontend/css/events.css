@@ -46,7 +46,7 @@ body {
 }
 
 .logo span {
-    color: #e45cff;
+    color: #0071E3;
 }
 
 nav {
@@ -67,18 +67,18 @@ nav a {
 
 nav a:hover,
 nav .active {
-    color: #e45cff;
+    color: #0071E3;
 }
 
 .login-btn,
 .register-btn {
-    border: 1px solid #e45cff;
+    border: 1px solid #0071E3;
 
     border-radius: 7px;
 }
 
 .register-btn {
-    background: #e45cff;
+    background: #0071E3;
 
     color: #17002f !important;
 }
@@ -142,7 +142,7 @@ h1 {
 
     border-radius: 7px;
 
-    background: #e45cff;
+    background: #0071E3;
 
     color: #19002f;
 
