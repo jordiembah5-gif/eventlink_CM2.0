@@ -96,7 +96,7 @@ Organizers can access attendance information, including:
 The platform is designed to support:
 
 * 🇬🇧 English
-* 🇫🇷 French
+
 
 ⸻
 
@@ -234,7 +234,7 @@ EventLink-CM/
 
 1. Clone the Repository
 
-git clone https://github.com/YOUR-USERNAME/EventLink-CM.git
+git clone https://github.com/jordiembah5-gif/eventlink_CM2.0.git
 
 Move into the project directory:
 
