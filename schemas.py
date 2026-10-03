@@ -13,7 +13,7 @@
 # ==============================================================================
 
 # We use a tool called Pydantic for validation. BaseModel is the master blueprint for validation.
-from pydantic import BaseModel
+from pydantic import BaseModel,Emailstr
 
 # ------------------------------------------------------------------------------
 # 1. REGISTRATION SCHEMA
@@ -21,7 +21,7 @@ from pydantic import BaseModel
 # When a user signs up, we EXPECT them to send us this exact information.
 class UserRegister(BaseModel):
     name: str       # "str" means String (text). It must be text!
-    email: str
+    email: Emailstr
     password: str
     gender: str
 
