@@ -54,7 +54,8 @@ async function registerUser(event) {
         else          { window.location.href = '/user-home'; }
       }, 900);
     } else {
-      showMsg(msgEl, data.detail || 'Registration failed. Please try again.', 'error');
+     // Convert FastAPI's error list into readable text before showing it
+showMsg(msgEl, formatError(data.detail) || 'Registration failed. Please try again.', 'error');
     }
   } catch {
     showMsg(msgEl, 'Could not connect to the server. Please try again.', 'error');
