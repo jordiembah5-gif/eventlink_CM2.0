@@ -1,91 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventLink CM | Create Event</title>
-    <link rel="stylesheet" href="css/auth.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .auth-box { max-width: 500px; }
-        .auth-box select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; background-color: #f9f9f9; }
-    </style>
-    <link rel="stylesheet" href="css/futuristic.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventLink CM | Create Event</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <header class="navbar">
-    <a href="/" class="logo">EventLink <span>CM</span></a>
-    <nav id="navMenu">
-        <a href="/">Home</a>
-        <a href="/events">Events</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/login" class="login-btn">Login</a>
-        <a href="/register" class="register-btn">Register</a>
-    </nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <a href="/" class="logo">Event<span>Link</span> CM</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/user-home">Home</a></li>
+    <li><a href="/events">Browse Events</a></li>
+    <li><a href="/dashboard">My Tickets</a></li>
+    <li><a href="/organized">My Events</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button onclick="logout()" class="btn-ghost">Log out</button>
+  </div>
 </header>
 
-<main class="auth-page">
-    <div class="auth-box">
-        <h1>Create Event</h1>
-        <p>Host an event for the community!</p>
+<div class="dashboard-layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-section">Menu</div>
+    <a href="/user-home" class="sidebar-item"><i class="fas fa-home"></i> Overview</a>
+    <a href="/events" class="sidebar-item"><i class="fas fa-compass"></i> Browse Events</a>
+    <a href="/dashboard" class="sidebar-item"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+    <a href="/organized" class="sidebar-item"><i class="fas fa-calendar-check"></i> My Events</a>
+    <a href="/create-event" class="sidebar-item active"><i class="fas fa-plus-circle"></i> Create Event</a>
+    <div class="sidebar-section" style="margin-top:16px;">Account</div>
+    <a href="#" class="sidebar-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log out</a>
+  </nav>
 
+  <!-- MAIN -->
+  <main class="dashboard-main">
+    <div style="max-width:640px;">
+      <div style="margin-bottom:28px;">
+        <h1 style="font-size:24px;margin-bottom:4px;">Create a new event</h1>
+        <p style="color:#5A5E58;font-size:14px;">Fill in the details below. Your event will go live immediately.</p>
+      </div>
+
+      <div class="card" style="padding:32px;">
         <form id="createEventForm" onsubmit="submitEvent(event)">
-            <input id="eventName" type="text" placeholder="Event Name (e.g. Douala Tech Expo)" required>
-            <input id="eventLocation" type="text" placeholder="Location (e.g. Douala)" required>
-            <input id="eventDate" type="datetime-local" required>
-            
-            <select id="eventCategory" required>
-                <option value="" disabled selected>Select Category</option>
-                <option value="music">Music</option>
-                <option value="business">Business</option>
-                <option value="technology">Technology</option>
-                <option value="education">Education</option>
-            </select>
 
-            <button type="submit">Publish Event</button>
-            <p id="message"></p>
+          <div class="form-group">
+            <label for="eventName">Event name *</label>
+            <input id="eventName" type="text" placeholder="e.g. Douala Tech Expo 2026" required>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div class="form-group">
+              <label for="eventCategory">Category *</label>
+              <select id="eventCategory" required>
+                <option value="" disabled selected>Select category</option>
+                <option value="music">🎵 Music</option>
+                <option value="business">💼 Business</option>
+                <option value="technology">💻 Technology</option>
+                <option value="education">📚 Education</option>
+                <option value="sports">⚽ Sports</option>
+                <option value="arts">🎨 Arts & Culture</option>
+                <option value="food">🍽️ Food & Drink</option>
+                <option value="community">🤝 Community</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="eventDate">Date & time *</label>
+              <input id="eventDate" type="datetime-local" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eventLocation">Location *</label>
+            <input id="eventLocation" type="text" placeholder="e.g. Palais des Congrès, Yaoundé" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventIcon">Cover image URL <span style="color:#8C908A;font-weight:400;">(optional)</span></label>
+            <input id="eventIcon" type="url" placeholder="https://images.unsplash.com/...">
+            <div style="font-size:12px;color:#8C908A;margin-top:6px;">Paste a direct image link. Leave blank for a default image.</div>
+          </div>
+
+          <!-- Image preview -->
+          <div id="imgPreviewWrap" style="display:none;margin-bottom:18px;">
+            <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Preview</div>
+            <div style="border-radius:12px;overflow:hidden;aspect-ratio:16/9;max-width:300px;">
+              <img id="imgPreview" src="" alt="Preview" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+
+          <div style="border-top:1px solid #E4E6E2;padding-top:20px;display:flex;gap:12px;">
+            <button type="submit" class="btn btn-green" style="flex:1;justify-content:center;padding:13px;">
+              <i class="fas fa-rocket"></i> Publish event
+            </button>
+            <a href="/user-home" class="btn btn-outline">Cancel</a>
+          </div>
+
+          <div id="message" class="alert" style="display:none;margin-top:12px;"></div>
         </form>
+      </div>
+
+      <!-- TIPS -->
+      <div class="card" style="padding:20px;margin-top:20px;background:#F8F9F6;border:1px dashed #E4E6E2;box-shadow:none;">
+        <h4 style="font-size:14px;margin-bottom:10px;"><i class="fas fa-lightbulb" style="color:#2DB67D;"></i> Tips for a great event listing</h4>
+        <ul style="color:#5A5E58;font-size:13px;line-height:2;padding-left:18px;">
+          <li>Use a clear, descriptive event name</li>
+          <li>Include the full venue name and city in the location</li>
+          <li>Add a high-quality cover photo (16:9 ratio works best)</li>
+          <li>Double-check the date and time before publishing</li>
+        </ul>
+      </div>
     </div>
-</main>
+  </main>
+</div>
 
+<script>
+function toggleNav() { document.getElementById('navLinks')?.classList.toggle('open'); }
+function logout() { localStorage.removeItem('currentUser'); window.location.href = '/'; }
 
+// Image preview on URL input
+document.getElementById('eventIcon').addEventListener('input', function() {
+  const wrap = document.getElementById('imgPreviewWrap');
+  const img  = document.getElementById('imgPreview');
+  const val  = this.value.trim();
+  if (val) {
+    img.src = val;
+    img.onerror = () => { wrap.style.display = 'none'; };
+    img.onload  = () => { wrap.style.display = 'block'; };
+  } else {
+    wrap.style.display = 'none';
+  }
+});
 
-<footer style="background-color: #f9f9f9; padding: 40px 10%; border-top: 1px solid #ddd; margin-top: 40px;">
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">EventLink CM</h3>
-            <p style="color: #555; line-height: 1.6;">Your premium platform to discover, organize, and connect with people through amazing events across Cameroon. We bring the community together, one event at a time.</p>
-        </div>
-        <div style="flex: 1; min-width: 200px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Quick Links</h3>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px;"><a href="/" style="color: #28a745; text-decoration: none; font-weight: bold;">Home</a></li>
-                <li style="margin-bottom: 10px;"><a href="/events" style="color: #28a745; text-decoration: none; font-weight: bold;">Browse Events</a></li>
-                <li style="margin-bottom: 10px;"><a href="/create-event" style="color: #28a745; text-decoration: none; font-weight: bold;">Create an Event</a></li>
-                <li style="margin-bottom: 10px;"><a href="/about" style="color: #28a745; text-decoration: none; font-weight: bold;">About Us</a></li>
-                <li style="margin-bottom: 10px;"><a href="/contact" style="color: #28a745; text-decoration: none; font-weight: bold;">Contact</a></li>
-            </ul>
-        </div>
-        <div style="flex: 1; min-width: 250px;">
-            <h3 style="color: #10003c; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> 123 Innovation Avenue, Douala, Cameroon</p>
-            <p style="color: #555; margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@eventlink-cm.com</p>
-            <p style="color: #555;"><i class="fas fa-phone"></i> +237 600 000 000</p>
-        </div>
-    </div>
-    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #777;">
-        <p>© 2026 EventLink CM. Built with precision and care. All rights reserved.</p>
-    </div>
-</footer>
+async function submitEvent(e) {
+  e.preventDefault();
 
+  const email = localStorage.getItem('currentUser');
+  if (!email) { window.location.href = '/login'; return; }
 
+  const msgEl = document.getElementById('message');
 
-<script src="js/create-event.js"></script>
-<!-- Google Maps Places API for Venue Registration -->
-<!-- Replace YOUR_GOOGLE_MAPS_API_KEY with an actual API key to enable Autocomplete -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap" async defer></script>
+  const rawDate = document.getElementById('eventDate').value;
+  const dateObj = new Date(rawDate);
+  const formatted = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const payload = {
+    name:       document.getElementById('eventName').value.trim(),
+    category:   document.getElementById('eventCategory').value,
+    location:   document.getElementById('eventLocation').value.trim(),
+    date:       formatted,
+    icon:       document.getElementById('eventIcon').value.trim() || 'images/futuristic_tech.jpg',
+    created_by: email
+  };
+
+  try {
+    const res  = await fetch('/api/events', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      msgEl.textContent = '🎉 Event published! Redirecting…';
+      msgEl.className   = 'alert alert-success';
+      msgEl.style.display = 'block';
+      setTimeout(() => { window.location.href = '/organized'; }, 1200);
+    } else {
+      msgEl.textContent = data.detail || 'Failed to create event. Please try again.';
+      msgEl.className   = 'alert alert-error';
+      msgEl.style.display = 'block';
+    }
+  } catch {
+    msgEl.textContent   = 'Could not connect to the server.';
+    msgEl.className     = 'alert alert-error';
+    msgEl.style.display = 'block';
+  }
+}
+</script>
 </body>
 </html>

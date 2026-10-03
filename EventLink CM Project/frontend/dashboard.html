@@ -1,113 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventLink CM | Dashboard</title>
-    <link rel="stylesheet" href="css/events.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/futuristic.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventLink CM | My Tickets</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <header class="navbar">
-    <a href="/" class="logo">EventLink <span>CM</span></a>
-    <nav id="navMenu">
-        <a href="/">Home</a>
-        <a href="/events">Events</a>
-        <a href="/about">About</a>
-        <a href="/dashboard" class="active" style="font-weight: 700; color: #0071E3 !important;">My Tickets</a>
-        <a href="/contact">Contact</a>
-        <button onclick="logout()" class="secondary-btn" style="padding: 8px 16px !important;">Logout</button>
-    </nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <a href="/" class="logo">Event<span>Link</span> CM</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/user-home">Home</a></li>
+    <li><a href="/events">Browse Events</a></li>
+    <li><a href="/dashboard" class="active">My Tickets</a></li>
+    <li><a href="/organized">My Events</a></li>
+  </ul>
+  <div class="nav-actions">
+    <span id="navUserName" style="color:rgba(255,255,255,0.6);font-size:13px;"></span>
+    <button onclick="logout()" class="btn-ghost">Log out</button>
+  </div>
 </header>
 
-<main class="page" style="padding-top: 100px;">
-    <h1 style="text-align: center; margin-bottom: 10px;">My Dashboard</h1>
-    <p style="text-align: center; color: #86868B; margin-bottom: 40px;">View your registered events and access your QR tickets.</p>
+<div class="dashboard-layout">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-section">Menu</div>
+    <a href="/user-home" class="sidebar-item"><i class="fas fa-home"></i> Overview</a>
+    <a href="/events" class="sidebar-item"><i class="fas fa-compass"></i> Browse Events</a>
+    <a href="/dashboard" class="sidebar-item active"><i class="fas fa-ticket-alt"></i> My Tickets</a>
+    <a href="/organized" class="sidebar-item"><i class="fas fa-calendar-check"></i> My Events</a>
+    <a href="/create-event" class="sidebar-item"><i class="fas fa-plus-circle"></i> Create Event</a>
+    <div class="sidebar-section" style="margin-top:16px;">Account</div>
+    <a href="#" class="sidebar-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log out</a>
+  </nav>
 
-    <div class="event-grid" id="dashboardGrid">
-        <p style="text-align: center; width: 100%;">Loading your tickets...</p>
+  <!-- MAIN -->
+  <main class="dashboard-main">
+    <div style="margin-bottom:28px;">
+      <h1 style="font-size:24px;margin-bottom:4px;">My Tickets</h1>
+      <p style="color:#5A5E58;font-size:14px;">All events you've registered for. Tap a ticket to get your QR code.</p>
     </div>
-</main>
 
-<!-- QR Code Modal -->
-<div id="qrModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); backdrop-filter: blur(5px); justify-content: center; align-items: center;">
-    <div style="background-color: white; padding: 40px; border-radius: 18px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
-        <h2 style="color: #0071E3; margin-bottom: 10px;"><i class="fas fa-ticket-alt"></i> Entry Ticket</h2>
-        <p id="qrMessage" style="color: #86868B; margin-bottom: 20px;">Present this QR code at the venue.</p>
-        <img id="qrImage" src="" alt="QR Code" style="margin: 20px 0; width: 200px; height: 200px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <br>
-        <button onclick="closeModal()" class="primary-btn" style="width: 100%;">Close Ticket</button>
+    <div class="grid-3" id="dashboardGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#8C908A;">
+        <i class="fas fa-spinner fa-spin" style="font-size:28px;color:#2DB67D;margin-bottom:16px;display:block;"></i>
+        Loading your tickets…
+      </div>
     </div>
+
+    <div id="emptyState" style="display:none;text-align:center;padding:80px 20px;">
+      <i class="fas fa-ticket-alt" style="font-size:48px;color:#E4E6E2;margin-bottom:16px;display:block;"></i>
+      <h3 style="margin-bottom:8px;color:#5A5E58;">No tickets yet</h3>
+      <p style="color:#8C908A;margin-bottom:20px;">Register for an event and your tickets will appear here.</p>
+      <a href="/events" class="btn btn-green">Browse Events</a>
+    </div>
+  </main>
+</div>
+
+<!-- QR MODAL -->
+<div id="qrModal" class="modal-overlay">
+  <div class="modal-box">
+    <div style="width:52px;height:52px;background:#E8F7F1;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+      <i class="fas fa-ticket-alt" style="color:#2DB67D;font-size:22px;"></i>
+    </div>
+    <h2>Your Entry Ticket</h2>
+    <p id="qrMessage" style="color:#5A5E58;">Show this QR code at the venue entrance.</p>
+    <img id="qrImage" src="" alt="QR Code" style="border-radius:12px;border:1px solid #E4E6E2;margin:8px auto;">
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-outline" style="flex:1;" onclick="closeModal()">Close</button>
+      <button class="btn btn-green" style="flex:1;" onclick="closeModal()">Got it!</button>
+    </div>
+  </div>
 </div>
 
 <script>
-    function toggleMenu() {
-        const menu = document.getElementById("navMenu");
-        menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+function toggleNav() { document.getElementById('navLinks')?.classList.toggle('open'); }
+
+function logout() {
+  localStorage.removeItem('currentUser');
+  window.location.href = '/';
+}
+
+function closeModal() {
+  document.getElementById('qrModal').classList.remove('open');
+}
+
+function showTicket(eventName, userEmail) {
+  document.getElementById('qrMessage').textContent = `Valid ticket for "${eventName}"`;
+  const qrData = encodeURIComponent(`EventLink CM | Event: ${eventName} | User: ${userEmail}`);
+  document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrData}`;
+  document.getElementById('qrModal').classList.add('open');
+}
+
+document.addEventListener('click', e => { if (e.target.id === 'qrModal') closeModal(); });
+
+const FALLBACK = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&auto=format&fit=crop&q=70';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const email = localStorage.getItem('currentUser');
+  if (!email) { window.location.href = '/login'; return; }
+
+  const nameEl = document.getElementById('navUserName');
+  if (nameEl) nameEl.textContent = email.split('@')[0];
+
+  const grid  = document.getElementById('dashboardGrid');
+  const empty = document.getElementById('emptyState');
+
+  try {
+    const res  = await fetch(`/api/users/${email}/rsvps`);
+    const data = await res.json();
+    const events = data.events || [];
+
+    if (events.length === 0) {
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      return;
     }
 
-    function logout() {
-        localStorage.removeItem("currentUser");
-        window.location.href = "/";
-    }
-
-    function closeModal() {
-        document.getElementById("qrModal").style.display = "none";
-    }
-
-    function showTicket(eventName, eventId) {
-        const currentUserEmail = localStorage.getItem("currentUser");
-        document.getElementById("qrMessage").textContent = `Valid ticket for ${eventName}`;
-        const qrData = encodeURIComponent(`Event: ${eventName} | User: ${currentUserEmail}`);
-        document.getElementById("qrImage").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrData}`;
-        document.getElementById("qrModal").style.display = "flex";
-    }
-
-    document.addEventListener("DOMContentLoaded", async () => {
-        const currentUserEmail = localStorage.getItem("currentUser");
-        if (!currentUserEmail) {
-            alert("You must be logged in to view your dashboard.");
-            window.location.href = "/login";
-            return;
-        }
-
-        try {
-            const response = await fetch(`/api/users/${currentUserEmail}/rsvps`);
-            const data = await response.json();
-            const grid = document.getElementById("dashboardGrid");
-            
-            grid.innerHTML = ""; 
-            
-            if (!data.events || data.events.length === 0) {
-                grid.innerHTML = "<p style='text-align: center; width: 100%;'>You haven't registered for any events yet. <a href='/events' style='color: #0071E3;'>Explore Events</a></p>";
-                return;
-            }
-
-            data.events.forEach(event => {
-                const article = document.createElement("article");
-                article.className = "event-card";
-                
-                article.innerHTML = `
-                    <div class="event-icon">
-                        <img src="${event.icon}" alt="Event Image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
-                    </div>
-                    <h2 style="margin-bottom: 10px;">${event.name}</h2>
-                    <p style="color: #86868B; margin-bottom: 5px;"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}" target="_blank" style="color: #0071E3; font-size: 14px; text-decoration: none; display: inline-block; margin-bottom: 10px;"><i class="fas fa-directions"></i> Get Directions</a>
-                    <p style="color: #86868B; margin-bottom: 20px;"><i class="fas fa-calendar-alt"></i> ${event.date}</p>
-                    <button class="primary-btn" onclick="showTicket('${event.name}', '${event.id}')" style="width: 100%;">View QR Ticket</button>
-                `;
-                
-                grid.appendChild(article);
-            });
-        } catch (error) {
-            console.error("Error loading tickets:", error);
-            document.getElementById("dashboardGrid").innerHTML = "<p>Failed to load your tickets.</p>";
-        }
-    });
+    grid.innerHTML = events.map(e => {
+      const img = e.icon && !e.icon.startsWith('images/') ? e.icon : FALLBACK;
+      const scanned = e.scanned ? `<span class="badge badge-green"><i class="fas fa-check"></i> Attended</span>` : `<span class="badge badge-gray">Not yet attended</span>`;
+      return `
+        <article class="event-card">
+          <div class="event-card-image">
+            <img src="${img}" alt="${e.name}" loading="lazy" onerror="this.src='${FALLBACK}'">
+          </div>
+          <div class="event-card-body">
+            <div class="event-card-category">${e.category || 'Event'}</div>
+            <div class="event-card-title">${e.name}</div>
+            <div class="event-card-meta">
+              <span><i class="fas fa-map-marker-alt"></i>${e.location}</span>
+              <span><i class="fas fa-calendar-alt"></i>${e.date}</span>
+            </div>
+          </div>
+          <div class="event-card-footer">
+            ${scanned}
+            <button class="btn btn-green btn-sm" onclick="showTicket('${e.name}','${email}')">
+              <i class="fas fa-qrcode"></i> View ticket
+            </button>
+          </div>
+        </article>`;
+    }).join('');
+  } catch {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#8C908A;">Could not load tickets. Please try again.</div>`;
+  }
+});
 </script>
 </body>
 </html>
