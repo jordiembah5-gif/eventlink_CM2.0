@@ -224,3 +224,15 @@ def get_analytics(): return FileResponse(os.path.join(frontend_path, "analytics.
 app.mount("/css", StaticFiles(directory=os.path.join(frontend_path, "css")), name="css")
 app.mount("/js", StaticFiles(directory=os.path.join(frontend_path, "js")), name="js")
 app.mount("/images", StaticFiles(directory=os.path.join(frontend_path, "images")), name="images")
+import os
+from fastapi.staticfiles import StaticFiles
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app.mount(
+    "/",
+    StaticFiles(
+        directory=os.path.join(BASE_DIR, "EventLink CM Project", "frontend"),
+        html=True,
+    ),
+    name="frontend",
+)
