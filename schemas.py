@@ -13,7 +13,7 @@
 # ==============================================================================
 
 # We use a tool called Pydantic for validation. BaseModel is the master blueprint for validation.
-from pydantic import BaseModel,Emailstr
+from pydantic import BaseModel, Emailstr
 
 # ------------------------------------------------------------------------------
 # 1. REGISTRATION SCHEMA
